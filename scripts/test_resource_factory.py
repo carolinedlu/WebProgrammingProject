@@ -22,17 +22,28 @@ class TestResourceFactory(unittest.TestCase):
             "name": "Raleigh-Durham International Airport",
             "code": "RDU",
         })
-        seeder.CreateInstance("/airports", airport)
+        response = seeder.CreateInstance("/airports", airport)
+        airport_id = response["id"]
 
         # ResourceFactory.Flight
-        # TODO(rogowski): Investigate why POSTing to /flights doesn't work
-        # flight = ResourceFactory.Flight("10:00", "13:00", "AA 2267", 1, 2)
-        # seeder.CreateInstance("/flights", flight)
+        flight = ResourceFactory.Flight({
+            "departs_at": "10:00",
+            "arrives_at": "13:00",
+            "number": "AA 2267",
+            "departure_id": airport_id,
+            # This plane ain't goin' nowhere
+            "arrival_id": airport_id
+        })
+        response = seeder.CreateInstance("/flights", flight)
+        flight_id = response["id"]
 
         # ResourceFactory.Instance
-        # TODO(rogowski): Investigate why POSTing to /instances doesn't work
-        # instance = ResourceFactory.Instance(1, "2018-12-21")
-        # seeder.CreateInstance("/instances", instance)
+        instance = ResourceFactory.Instance({
+            "flight_id": flight_id,
+            "date": "2018-12-21"
+        })
+        response = seeder.CreateInstance("/instances", instance)
+        instance_id = response["id"]
 
         # ResourceFactory.Itinerary
         itinerary = ResourceFactory.Itinerary({
@@ -44,28 +55,28 @@ class TestResourceFactory(unittest.TestCase):
         plane = ResourceFactory.Plane({
             "name": "AA Airbus A320",
         })
-        seeder.CreateInstance("/planes", plane)
+        response = seeder.CreateInstance("/planes", plane)
+        plane_id = response["id"]
 
         # ResourceFactory.Seat
-        # TODO(rogowski): Investigate why POSTing to /seats doesn't work
-        # seat = ResourceFactory.Seat({
-        #     "plane_id": 2,
-        #     "row": 21,
-        #     "number": "A",
-        # })
-        # seeder.CreateInstance("/seats", seat)
+        seat = ResourceFactory.Seat({
+            "plane_id": plane_id,
+            "row": 21,
+            "number": "A",
+        })
+        response = seeder.CreateInstance("/seats", seat)
+        seat_id = response["id"]
 
         # ResourceFactory.Ticket
-        # TODO(rogowski): Investigate why POSTing to /tickets doesn't work
-        # ticket = ResourceFactory.Ticket({
-        #     "first_name": "Aaron",
-        #     "last_name": "Smith",
-        #     "age": 27,
-        #     "gender": "male",
-        #     "instance_id": 1,
-        #     "seat_id": 21,
-        # })
-        # seeder.CreateInstance("/tickets", ticket)
+        ticket = ResourceFactory.Ticket({
+            "first_name": "Aaron",
+            "last_name": "Smith",
+            "age": 27,
+            "gender": "male",
+            "instance_id": instance_id,
+            "seat_id": seat_id,
+        })
+        seeder.CreateInstance("/tickets", ticket)
 
 if __name__ == "__main__":
     unittest.main()
