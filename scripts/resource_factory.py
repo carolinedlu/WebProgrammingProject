@@ -1,59 +1,42 @@
 class ResourceFactory:
 	# Public API
 
-	def User(username, password):
-		user = {}
-		user["username"] = username
-		user["password"] = password
+	def User(user):
+		assert("username" in user)
+		assert("password" in user)
 		return ResourceFactory.ConstructNamedPostData("user", user)
 
-	def Airline(name, logo_url=None):
-		airline = {}
-		airline["name"] = name
-		airline["logo_url"] = logo_url
+	def Airline(airline):
+		# TODO(rogowski): add assertions for required fields
 		return ResourceFactory.ConstructNamedPostData("airline", airline)
 
-	def Airport(name, code, latitude=None, longitude=None, city=None, state=None, city_url=None):
-		airport = {}
-		airport["name"] = name
-		airport["code"] = code
-		airport["latitude"] = latitude
-		airport["longitude"] = longitude
-		airport["city"] = city
-		airport["state"] = state
-		airport["city_url"] = city_url
+	def Airport(airport):
+		# TODO(rogowski): add assertions for required fields
 		return ResourceFactory.ConstructNamedPostData("airport", airport)
 
-	def Flight(departs_at, arrives_at, number, departure_id, arrival_id, plane_id=None, next_flight_id=None, airline_id=None):
-		flight = {}
-		flight["departs_at"] = departs_at
-		flight["arrives_at"] = arrives_at
-		flight["number"] = number
-		flight["departure_id"] = departure_id
-		flight["arrival_id"] = arrival_id
-		flight["plane_id"] = plane_id
-		flight["next_flight_id"] = next_flight_id
-		flight["airline_id"] = airline_id
+	def Flight(flight):
+		# TODO(rogowski): add assertions for required fields
 		return ResourceFactory.ConstructNamedPostData("flight", flight)
 
-	def Instance(flight_id, date, is_cancelled=None):
-		instance = {}
-		instance["flight_id"] = flight_id
-		instance["date"] = date
-		instance["is_cancelled"] = is_cancelled
+	def Instance(instance):
+		# TODO(rogowski): add assertions for required fields
 		return ResourceFactory.ConstructNamedPostData("instance", instance)
 
-	def Itinerary():
-		assert(False)
+	def Itinerary(itinerary):
+		# TODO(rogowski): add assertions for required fields
+		return ResourceFactory.ConstructNamedPostData("itinerary", itinerary)
 
-	def Plane():
-		assert(False)
+	def Plane(plane):
+		# TODO(rogowski): add assertions for required fields
+		return ResourceFactory.ConstructNamedPostData("plane", plane)
 
-	def Seat():
-		assert(False)
+	def Seat(seat):
+		# TODO(rogowski): add assertions for required fields
+		return ResourceFactory.ConstructNamedPostData("seat", seat)
 
-	def Ticket():
-		assert(False)
+	def Ticket(ticket):
+		# TODO(rogowski): add assertions for required fields
+		return ResourceFactory.ConstructNamedPostData("ticket", ticket)
 
 	# (Static) Helper Functions
 

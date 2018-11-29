@@ -12,11 +12,16 @@ class TestResourceFactory(unittest.TestCase):
         seeder.DeleteAllInstances()
 
         # ResourceFactory.Airline
-        airline = ResourceFactory.Airline("American Airlines", "https://www.aa.com/logo.png")
+        airline = ResourceFactory.Airline({
+            "name": "American Airlines",
+        })
         seeder.CreateInstance("/airlines", airline)
 
         # ResourceFactory.Airport
-        airport = ResourceFactory.Airport("Raleigh-Durham International Airport", "RDU")
+        airport = ResourceFactory.Airport({
+            "name": "Raleigh-Durham International Airport",
+            "code": "RDU",
+        })
         seeder.CreateInstance("/airports", airport)
 
         # ResourceFactory.Flight

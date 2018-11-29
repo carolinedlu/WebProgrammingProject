@@ -14,7 +14,10 @@ class Seeder:
 	# Public API
 
 	def Authenticate(self):
-		user = ResourceFactory.User(API_USERNAME, API_PASSWORD)
+		user = ResourceFactory.User({
+			"username": API_USERNAME,
+			"password": API_PASSWORD,
+		})
 		response = self.POST("/sessions", user)
 		assert(response.status_code == HTTPStatus.NO_CONTENT)
 

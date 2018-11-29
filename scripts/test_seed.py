@@ -14,7 +14,11 @@ class TestSeed(unittest.TestCase):
         self.assertEqual(len(response), 0)
 
         # Seeder.CreateInstance
-        airline = ResourceFactory.Airline("American Airlines", "https://www.aa.com/logo.png")
+        airline_model = {
+            "name": "American Airlines",
+            "logo_url": "https://www.aa.com/logo.png",
+        }
+        airline = ResourceFactory.Airline(airline_model)
         response = seeder.CreateInstance("/airlines", airline)
         airline_id = response["id"]
 
@@ -32,7 +36,8 @@ class TestSeed(unittest.TestCase):
         self.assertEqual(response["logo_url"], "https://www.aa.com/logo.png")
 
         # Seeder.UpdateInstance
-        airline = ResourceFactory.Airline("American Airlines", "https://www.aa.com/new-logo.png")
+        airline_model["logo_url"] = "https://www.aa.com/new-logo.png"
+        airline = ResourceFactory.Airline(airline_model)
         seeder.UpdateInstance("/airlines", airline_id, airline)
         response = seeder.GetInstance("/airlines", airline_id)
         self.assertEqual(response["logo_url"], "https://www.aa.com/new-logo.png")
