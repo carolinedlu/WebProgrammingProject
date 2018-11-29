@@ -35,23 +35,36 @@ class TestResourceFactory(unittest.TestCase):
         # seeder.CreateInstance("/instances", instance)
 
         # ResourceFactory.Itinerary
-        # TODO(rogowski): Implement and get test to pass
-        # itinerary = ResourceFactory.Itinerary()
-        # seeder.CreateInstance("/itineraries", itinerary)
+        itinerary = ResourceFactory.Itinerary({
+            "email": "kmp@cs.unc.edu",
+        })
+        seeder.CreateInstance("/itineraries", itinerary)
 
         # ResourceFactory.Plane
-        # TODO(rogowski): Implement and get test to pass
-        # plane = ResourceFactory.Plane()
-        # seeder.CreateInstance("/planes", plane)
+        plane = ResourceFactory.Plane({
+            "name": "AA Airbus A320",
+        })
+        seeder.CreateInstance("/planes", plane)
 
         # ResourceFactory.Seat
-        # TODO(rogowski): Implement and get test to pass
-        # seat = ResourceFactory.Seat()
+        # TODO(rogowski): Investigate why POSTing to /seats doesn't work
+        # seat = ResourceFactory.Seat({
+        #     "plane_id": 2,
+        #     "row": 21,
+        #     "number": "A",
+        # })
         # seeder.CreateInstance("/seats", seat)
 
         # ResourceFactory.Ticket
-        # TODO(rogowski): Implement and get test to pass
-        # ticket = ResourceFactory.Ticket()
+        # TODO(rogowski): Investigate why POSTing to /tickets doesn't work
+        # ticket = ResourceFactory.Ticket({
+        #     "first_name": "Aaron",
+        #     "last_name": "Smith",
+        #     "age": 27,
+        #     "gender": "male",
+        #     "instance_id": 1,
+        #     "seat_id": 21,
+        # })
         # seeder.CreateInstance("/tickets", ticket)
 
 if __name__ == "__main__":

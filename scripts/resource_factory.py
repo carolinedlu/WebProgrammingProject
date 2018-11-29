@@ -7,35 +7,50 @@ class ResourceFactory:
 		return ResourceFactory.ConstructNamedPostData("user", user)
 
 	def Airline(airline):
-		# TODO(rogowski): add assertions for required fields
+		assert("name" in airline)
 		return ResourceFactory.ConstructNamedPostData("airline", airline)
 
 	def Airport(airport):
-		# TODO(rogowski): add assertions for required fields
+		assert("name" in airport)
+		assert("code" in airport)
 		return ResourceFactory.ConstructNamedPostData("airport", airport)
 
 	def Flight(flight):
-		# TODO(rogowski): add assertions for required fields
+		assert("departs_at" in flight)
+		assert("arrives_at" in flight)
+		assert("number" in flight)
+		assert("departure_id" in flight)
+		assert("arrival_id" in flight)
 		return ResourceFactory.ConstructNamedPostData("flight", flight)
 
 	def Instance(instance):
-		# TODO(rogowski): add assertions for required fields
+		assert("flight_id" in instance)
+		assert("date" in instance)
 		return ResourceFactory.ConstructNamedPostData("instance", instance)
 
 	def Itinerary(itinerary):
-		# TODO(rogowski): add assertions for required fields
+		# A model cannot be empty, even if no parameters are required
+		assert(len(itinerary) > 0)
 		return ResourceFactory.ConstructNamedPostData("itinerary", itinerary)
 
 	def Plane(plane):
-		# TODO(rogowski): add assertions for required fields
+		# A model cannot be empty, even if no parameters are required
+		assert(len(plane) > 0)
 		return ResourceFactory.ConstructNamedPostData("plane", plane)
 
 	def Seat(seat):
-		# TODO(rogowski): add assertions for required fields
+		assert("plane_id" in seat)
+		assert("row" in seat)
+		assert("number" in seat)
 		return ResourceFactory.ConstructNamedPostData("seat", seat)
 
 	def Ticket(ticket):
-		# TODO(rogowski): add assertions for required fields
+		assert("first_name" in ticket)
+		assert("last_name" in ticket)
+		assert("age" in ticket)
+		assert("gender" in ticket)
+		assert("instance_id" in ticket)
+		assert("seat_id" in ticket)
 		return ResourceFactory.ConstructNamedPostData("ticket", ticket)
 
 	# (Static) Helper Functions
