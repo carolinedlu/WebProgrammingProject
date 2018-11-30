@@ -1,5 +1,8 @@
 //$(document).ready(() => {
 //};
+var mileage = 0;
+var destinations = 0;
+var passengers = 0;
 
 function buildModelsInterface() {
     emptyInterface();
@@ -26,24 +29,45 @@ function emptyInterface() {
 };
 
 function buildDestinationsInterface() {
+    if (mileage === 1) {
+        $('#mileage').empty();
+    } if (passengers === 1) {
+        $('#passengers').empty();
+}
     let body = $('body');
-
-    body.append('<h1>Destinations interface here</h1>');
-
+    body.append('<h1 id="destinations">Destinations interface here</h1>');
+    destinations = 1;
+  
     //Show states/airports that model has flown in and out of + reviews for model
 };
 
 function buildMileageInterface() {
+    if (destinations === 1) {
+        $('#destinations').empty();
+    } if (passengers === 1) {
+        $('#passengers').empty();
+    }
     let body = $('body');
 
-    body.append('<h1>Mileage interface here</h1>');
+    body.append('<h1 id="mileage">Mileage interface here</h1>');
+    mileage = 1;
+ 
+    
     //Show airplane model mileage
 };
 
 function buildPassengersInterface() {
-    let body = $('body');
+    if (destinations === 1) {
+        $('#destinations').empty();
+    } if (mileage === 1) {
+        $('#mileage').empty();
 
-    body.append('<h1>Passengers interface here</h1>');
+    }
+    let body = $('body');
+    body.append('<h1 id="mileage">Passengers interface here</h1>');
+    passengers = 1;
+
+ 
 
     //Show reviews from passengers on airplane model?
 };
