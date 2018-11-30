@@ -22,5 +22,7 @@ function DoPlaneExample() {
 			name: "A. Pilot",
 		});
 		console.log(`  Reviews (after):`, Reviews.Get(plane));
+
+		Backend.UpdatePlane(plane);
 	});
 }

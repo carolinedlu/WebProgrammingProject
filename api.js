@@ -26,6 +26,21 @@ class Backend {
 	static GetPassengers() {
 		return Ajax.GET(`/tickets`);
 	}
+
+	static UpdatePlane(plane) {
+		const resource = ResourceFactory.Plane(plane);
+		return Ajax.PUT(`/planes/${plane.id}`, resource);
+	}
+
+	static UpdateAirport(airport) {
+		const resource = ResourceFactory.Airport(airport);
+		return Ajax.PUT(`/airports/${airport.id}`, resource);
+	}
+
+	static AddPassenger(passenger) {
+		const resource = ResourceFactory.Ticket(passenger);
+		return Ajax.POST(`/tickets`, resource);
+	}
 }
 
 class Reviews {
