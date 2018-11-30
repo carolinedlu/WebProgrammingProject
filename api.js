@@ -18,6 +18,14 @@ class Backend {
 	static GetPlanes() {
 		return Ajax.GET(`/planes`);
 	}
+
+	static GetAirports() {
+		return Ajax.GET(`/airports`);
+	}
+
+	static GetPassengers() {
+		return Ajax.GET(`/tickets`);
+	}
 }
 
 class Reviews {
