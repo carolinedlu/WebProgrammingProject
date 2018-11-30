@@ -26,20 +26,23 @@ function emptyInterface() {
 };
 
 function buildDestinationsInterface() {
-    emptyInterface();
+    let body = $('body');
+
     body.append('<h1>Destinations interface here</h1>');
 
     //Show states/airports that model has flown in and out of + reviews for model
 };
 
 function buildMileageInterface() {
-    emptyInterface();
+    let body = $('body');
+
     body.append('<h1>Mileage interface here</h1>');
     //Show airplane model mileage
 };
 
 function buildPassengersInterface() {
-    emptyInterface();
+    let body = $('body');
+
     body.append('<h1>Passengers interface here</h1>');
 
     //Show reviews from passengers on airplane model?
