@@ -1,7 +1,9 @@
-
 const API_ROOT = "http://comp426.cs.unc.edu:3001"
 const API_USERNAME = "ilovekmp"
 const API_PASSWORD = "ilovekmp"
+
+const YOUTUBE_ROOT = 'https://www.googleapis.com/youtube/v3/search';
+const YOUTUBE_API_KEY = 'AIzaSyAkFNgi0mQGVObecEH08c5VrWGSHENksRw';
 
 class Backend {
 
@@ -143,5 +145,54 @@ class Ajax {
 			console.error(reason.statusText);
 			alert(`Error executing ${method} to ${url}: ${reason.statusText}`);
 		});
+	}
+}
+
+class YouTube {
+
+	// Public API
+
+	static async GetTopVideoForPlane(plane) {
+		const [result, err] = await til(YouTube.search(plane.name));
+		if (err !== null) {
+			throw err;
+		}
+
+		if (result.items.length === 0) {
+			throw Error(`No embeddable video search results found!`);
+		}
+
+		const videoId = result.items[0].id.videoId;
+		return `https://www.youtube.com/watch?v=${videoId}`;
+	}
+
+	// (Private) Helper Methods
+	static async search(query) {
+		const params = [
+			`part=snippet`,
+			`type=video`,
+			`videoEmbeddable=true`,
+			`key=${YOUTUBE_API_KEY}`,
+			`q=${query}`,
+		];
+		const url = `${YOUTUBE_ROOT}?${params.join('&')}`;
+		return $.get({
+			url: url,
+			method: 'GET',
+			crossDomain: true,
+		}).fail((reason) => {
+			console.error(reason.statusText);
+			alert(`Error executing ${method} to ${url}: ${reason.statusText}`);
+		});
+	}
+}
+
+// Helper method to wrap async/await error handling
+async function til(promise) {
+	try {
+		const data = await promise;
+		return [data, null];
+	} catch(e) {
+		return [null, e];
 	}
 }

@@ -24,5 +24,15 @@ function DoPlaneExample() {
 		console.log(`  Reviews (after):`, Reviews.Get(plane));
 
 		Backend.UpdatePlane(plane);
+		DoYouTubeExample(plane);
+	});
+}
+
+// YouTube API query example
+function DoYouTubeExample(plane) {
+	YouTube.GetTopVideoForPlane(plane).then((link) => {
+		console.log(`Link to top video result:`, link);
+	}).catch((err) => {
+		alert(err);
 	});
 }
