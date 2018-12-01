@@ -3,10 +3,13 @@
 
 <html>
 <head>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script src="FinalProject.js"></script>
+<script src="http://www.cs.unc.edu/~kmp/comp426fall18/jquery-3.3.1.js"></script>
+<script src="api.js"></script>
+<script src="finproj.js"></script>
 
-<link rel="stylesheet" type="text/css" href="FinalProject.css">
+<!-- <link rel="stylesheet" type="text/css" href="FinalProject.css"> -->
+</head>
+
 <title>Airplane Model Comparison Tool</title>
 
 <body>
@@ -14,11 +17,7 @@
 
 <div id="buttons-container">
 
-
-<button class="button">Models</button>
-
-
-<button class="button">Map</button>
+<button class="button" onclick="buildModelsInterface()">Models</button>
 
 <!-- 
 <div class="overlay-container">    
