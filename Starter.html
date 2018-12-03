@@ -1,55 +1,56 @@
-<!DOCTYPE html>
-<html lang="en-US"> 
+<!DOCTYPE HTML>
+<html lang="en-US">
 
-<html>
 <head>
-<script src="http://www.cs.unc.edu/~kmp/comp426fall18/jquery-3.3.1.js"></script>
-<script src="api.js"></script>
-<script src="finproj.js"></script>
+  <script src="http://www.cs.unc.edu/~kmp/comp426fall18/jquery-3.3.1.js"></script>
+  <script src="api.js"></script>
+  <script src="finproj.js"></script>
 
-<!-- <link rel="stylesheet" type="text/css" href="FinalProject.css"> -->
+  <link rel="stylesheet" type="text/css" href="FinalProject.css">
 </head>
 
 <title>Airplane Model Comparison Tool</title>
 
 <body>
-<h1 id="pageTitle">Airplane Model Comparison Tool</h1>
+  <h1 id="pageTitle">Airplane Model Comparison Tool</h1>
 
-<div id="buttons-container">
+  <div id="buttons-container">
+    <button class="button" onclick="buildModelInterface()">Models</button>
+    <button class="button" onclick="buildMapInterface()">Airports</button>
+  </div>
 
-<button class="button" onclick="buildModelsInterface()">Models</button>
+  <div class="models-container">
 
-<!-- 
-<div class="overlay-container">    
-<button class="button" id="Boeing737"></button>
-<div class="overlay">
-    <div class="text">Boeing 737</div>
-</div>
-</div>
+    <div class="overlay-container">
+      <button class="model" id="Boeing737" onclick="buildModelsInterface()"></button>
+      <div class="overlay">
+        <div class="text">Boeing 737</div>
+      </div>
+    </div>
 
-<div class="overlay-container">    
-<button class="button" id="AirbusA380"></button>
-<div class="overlay">
-    <div class="text">Airbus A380</div>
-</div>
-</div>
+    <div class="overlay-container">
+      <button class="model" id="AirbusA380" onclick="buildModelsInterface()"></button>
+      <div class="overlay">
+        <div class="text">Airbus A380</div>
+        </div>
+    </div>
 
-<div class="overlay-container">    
-<button class="button" id="AirbusA320"></button>
-<div class="overlay">
-    <div class="text">Airbus A320</div>
-</div>
-</div>
+    <div class="overlay-container">
+      <button class="model" id="AirbusA320" onclick="buildModelsInterface()"></button>
+      <div class="overlay">
+        <div class="text">Airbus A320</div>
+      </div>
+    </div>
 
-<div class="overlay-container">    
-<button class="button" id="Boeing747"></button>
-<div class="overlay">
-    <div class="text">Boeing 747</div>
-</div>
-</div> -->
+    <div class="overlay-container">
+      <button class="model" id="Boeing747" onclick="buildModelsInterface()"></button>
+      <div class="overlay">
+        <div class="text">Boeing 747</div>
+      </div>
+    </div>
 
-</div>
+  </div>
 
-</body>
+  </body>
 
 </html>
