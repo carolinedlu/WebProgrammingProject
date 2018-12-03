@@ -1,8 +1,8 @@
 var builtInterface = 0;
 
-async function buildModelsInterface() {
-    await Backend.Authenticate();
+Backend.Authenticate();
 
+async function buildModelsInterface() {
     emptyInterface();
     let body = $('body');
     body.append('<h1>Select an airplane model:</h1>');
