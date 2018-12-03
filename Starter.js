@@ -18,14 +18,14 @@ async function buildModelsInterface() {
     body.append('<button id="mileage" onclick="buildMileageInterface()">Mileage</button>');
     body.append('<button id="passengers" onclick="buildPassengersInterface()">Passengers</button>');
   
-    $("#dropDown").change(function planeObject(){ 
+    $("#dropDown").change(function planeObject(){ //Every time user selects a different plane
         for (const model of models) { //Why is this loop not running?!?!?!?
             let selection = document.getElementById("dropDown");
             let selectionName = selection.options[selection.selectedIndex].value;
             if (model.name === selectionName) {
                 console.log("success");
-                buildReviewInterface(model);
-                displayVideos(model);
+                buildReviewInterface(model); //Set up review interface for this plane
+                displayVideos(model); //Display Youtube videos for this plane
             }
         }
     });
@@ -40,7 +40,6 @@ function emptyInterface() {
 function buildReviewInterface(model) {
 	let body = $('body');
     body.append('<div id="reviews"><h1>Reviews</h1>');
-	body.append('<p>Display average stars out of five and a count of total reviews here</p>');
     body.append('<p>Display excerpts from reviews here</p>');
     body.append('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
     body.append('<button id="submitNewReview">Submit Review</button></div>');
