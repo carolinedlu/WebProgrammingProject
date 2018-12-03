@@ -163,7 +163,7 @@ class YouTube {
 		}
 
 		const videoId = result.items[0].id.videoId;
-		return `https://www.youtube.com/watch?v=${videoId}`;
+		return `https://www.youtube.com/embed/${videoId}`;
 	}
 
 	// (Private) Helper Methods
