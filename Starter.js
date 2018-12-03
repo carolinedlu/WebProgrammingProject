@@ -1,6 +1,8 @@
 var builtInterface = 0;
 
 async function buildModelsInterface() {
+    await Backend.Authenticate();
+
     emptyInterface();
     let body = $('body');
     body.append('<h1>Select an airplane model:</h1>');
@@ -8,7 +10,7 @@ async function buildModelsInterface() {
      $('body').append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
 
     for (const model of models) { //Why is this loop not running?!?!?!?
-        let option = document.createElement("option");     
+        let option = document.createElement("option");
         option.text = model.name;
         option.value = model.name;
         document.getElementById("dropDown").options.add(option); //Add plane to drop-down menu
@@ -17,7 +19,7 @@ async function buildModelsInterface() {
     body.append('<button id="destinations" onclick="buildDestinationsInterface()">Destinations</button>');
     body.append('<button id="mileage" onclick="buildMileageInterface()">Mileage</button>');
     body.append('<button id="passengers" onclick="buildPassengersInterface()">Passengers</button>');
-  
+
     $("#dropDown").change(function planeObject(){ //Every time user selects a different plane
         for (const model of models) { //Why is this loop not running?!?!?!?
             let selection = document.getElementById("dropDown");
