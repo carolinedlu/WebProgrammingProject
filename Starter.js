@@ -1,21 +1,34 @@
 var builtInterface = 0;
 
-function buildModelsInterface() {
+async function buildModelsInterface() {
     emptyInterface();
     let body = $('body');
-    //Possibly have a carousel here with airplane models. For now, drop-down menu.
     body.append('<h1>Select an airplane model:</h1>');
-    //This section should dynamically generate choices based on the airplane models that are in the database. For now, static options.
-    body.append('<select><option id="modA" value="ModelA">Model A</option><option id="modB" value="ModelB">Model B</option><option id="modC" value="ModelC">Model C</option><option value="ModelD">Model D</option></select><br><br>');
-    body.append('<button onclick="buildDestinationsInterface()">Destinations</button>');
-    body.append('<button onclick="buildMileageInterface()">Mileage</button>');
-	body.append('<button onclick="buildPassengersInterface()">Passengers</button>');
-	buildReviewInterface();
-	//User selects a model from the dynamically generated dropdown list. Get the name of the model from the user's selection. Set planeName = name of model selected by user.
-	let planeName = "Model A";
-	//let planeName = document.getElementById("modA").value; //Change this to get plane name based on selection from dynamically created menu
-    body.append('<h1>Videos</h1>');
-    body.append('<button onclick="displayVideos('+planeName+')">View top videos of this plane</button>');
+    const models = await Backend.GetPlanes();
+     $('body').append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
+
+    for (const model of models) { //Why is this loop not running?!?!?!?
+        let option = document.createElement("option");     
+        option.text = model.name;
+        option.value = model.name;
+        document.getElementById("dropDown").options.add(option); //Add plane to drop-down menu
+    }
+
+    body.append('<button id="destinations" onclick="buildDestinationsInterface()">Destinations</button>');
+    body.append('<button id="mileage" onclick="buildMileageInterface()">Mileage</button>');
+    body.append('<button id="passengers" onclick="buildPassengersInterface()">Passengers</button>');
+  
+    $("#dropDown").change(function planeObject(){ 
+        for (const model of models) { //Why is this loop not running?!?!?!?
+            let selection = document.getElementById("dropDown");
+            let selectionName = selection.options[selection.selectedIndex].value;
+            if (model.name === selectionName) {
+                console.log("success");
+                buildReviewInterface(model);
+                displayVideos(model);
+            }
+        }
+    });
 };
 
 function emptyInterface() {
@@ -24,14 +37,20 @@ function emptyInterface() {
     body.append('<button onclick="buildHomeInterface()">Home</button><br>');
 };
 
-function buildReviewInterface() {
+function buildReviewInterface(model) {
 	let body = $('body');
-	body.append('<h1>Reviews</h1>');
+    body.append('<div id="reviews"><h1>Reviews</h1>');
 	body.append('<p>Display average stars out of five and a count of total reviews here</p>');
-	body.append('<p>Display excerpts from reviews here</p>');
+    body.append('<p>Display excerpts from reviews here</p>');
     body.append('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
-	body.append('<button onclick="submitNewReview()">Submit Review</button>');
-}
+    body.append('<button id="submitNewReview">Submit Review</button></div>');
+    let submit = document.getElementById("submitNewReview");
+    submit.addEventListener("click", function submitNewReview() {
+         let review = document.getElementById("newReview").value;
+         Reviews.Add(model, review);
+         alert("Thanks for your input. Your review has been added.");
+    }, false);
+};
 
 function buildDestinationsInterface() {
     if (builtInterface === 1) {
@@ -40,11 +59,8 @@ function buildDestinationsInterface() {
     let body = $('body');
     body.append('<h1 class="interface">Destinations interface here</h1>');
     builtInterface=1;
-	//Show states/airports that model has flown in and out of + reviews for model
-	
 	body.append('<h2 class="interface">Countries</h2>');
 	body.append('<p class="interface">Display countries here</p>');
-	
 	body.append('<h2 class="interface">Airports</h2>');
 	body.append('<p class="interface">Display airports here</p>');
 };
@@ -56,9 +72,7 @@ function buildMileageInterface() {
     let body = $('body');
     body.append('<h1 class="interface">Mileage interface here</h1>');
     builtInterface=1;
-	//Show airplane model mileage
 	body.append('<h2 class="interface">Display number of miles traveled by this model here</h2>');
-
 };
 
 function buildPassengersInterface() {
@@ -68,7 +82,6 @@ function buildPassengersInterface() {
     let body = $('body');
     body.append('<h1 class="interface">Passengers interface here</h1>');
     builtInterface=1;
-	//Show reviews from passengers on airplane model?
 	body.append('<h2 class="interface">Display number of passengers that have rode on this model here</h2>');
 };
 
@@ -79,16 +92,9 @@ function buildHomeInterface() {
     body.append('<button class="button" onclick="buildMapInterface()">Map</button>');
 };
 
-
-function submitNewReview() {
-	let obj = 0; //What should this be?
-    let review = document.getElementById("newReview").value;
-	console.log(review);
-	Reviews.Add(obj, review);
-};
-
-function displayVideos(planeName) {
-	let url = YouTube.GetTopVideoForPlane(planeName);
+async function displayVideos(planeObj) {
+    let url = await YouTube.GetTopVideoForPlane(planeObj);
     let body = $('body');
+    body.append('<p>View videos here<p>');
 	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
 };
