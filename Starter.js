@@ -3,11 +3,11 @@ var builtInterface = 0;
 Backend.Authenticate();
 
 async function buildModelsInterface() {
-let body = $('body');
-    emptyInterface();
-    body.append('<h1 class=modelHeader">Select an airplane model:</h1>');
-    const models = await Backend.GetPlanes();
-    body.append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
+	let body = $('body');
+	emptyInterface(); //Clear page
+	body.append('<h1 class=modelHeader">Select an airplane model:</h1>');
+	const models = await Backend.GetPlanes();
+	body.append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
 
     for (const model of models) {
         let option = document.createElement("option");
@@ -16,13 +16,12 @@ let body = $('body');
         document.getElementById("dropDown").options.add(option); //Add plane to drop-down menu
     }
 
-    let selected_model = null;
-     
-body.append('<div class="menuDiv"></div>');
-body.append('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>');
-
-body.append('<div class="newDiv"></div>');
-body.append('<div class="revDiv"></div>');
+	let selected_model = null;
+ 
+	body.append('<div class="menuDiv"></div>');
+	body.append('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>');
+	body.append('<div class="newDiv"></div>');
+	body.append('<div class="revDiv"></div>');
 	
    // const passengers_button = $('<button id="passengers">Passengers</button>').click(() => {
     //    if (selected_model !== null) {
@@ -36,7 +35,6 @@ body.append('<div class="revDiv"></div>');
             let selection = document.getElementById("dropDown");
             let selectionName = selection.options[selection.selectedIndex].value;
             if (model.name === selectionName) {
-                console.log("success");
                 selected_model = model;
                 buildReviewInterface(model); //Set up review interface for this plane
                 displayVideos(model); //Display Youtube videos for this plane
@@ -46,21 +44,17 @@ body.append('<div class="revDiv"></div>');
 };
 
  function buildModelInterface() {
-	 let body = $('body');
-
     $('.models-container').toggle();
  };
 
 function emptyInterface() {
 	let body = $('body');
-
-    body.empty();
-    body.append('<button class="homeBtn" onclick="buildHomeInterface()">Home</button><br>');
+	body.empty();
+	body.append('<button class="homeBtn" onclick="buildHomeInterface()">Home</button><br>');
 };
 
 function buildReviewInterface(model) {
 	let body = $('body');
-
 	body.append('<h1>Reviews</h1>');
 	const visible_reviews = $('<div id="visible-reviews">');
 	const updateReviews = () => {
@@ -74,7 +68,7 @@ function buildReviewInterface(model) {
 body.append(visible_reviews);
 updateReviews();
 body.append('<h2>Enter a new review of the '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
-body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>');
+body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button><br><br>');
 
  //   $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
  //   $('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>').appendTo('.revDiv');
@@ -95,9 +89,7 @@ body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Rev
 
 var map;
 function initMap(lat, lng) {
-	let body = $('body');
-
-  map = new google.maps.Map(document.getElementById('map'), {
+map = new google.maps.Map(document.getElementById('map'), {
     center: {
         lat: 35.9100, lng: -79.0533},
     zoom: 8
@@ -107,13 +99,12 @@ function initMap(lat, lng) {
 function buildDestinationsInterface() {
 	let body = $('body');
 
-    if (builtInterface === 1) {
+if (builtInterface === 1) {
         $('.interface').empty();
     }
 	body.append('<h1 class="interface">Destinations interface here</h1>');
-   // $('<h1 class="interface">Destinations interface here</h1>').appendTo('.newDiv');
-    builtInterface=1;
-    body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
+ 	builtInterface=1;
+	body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
 };
 
 // function buildPassengersInterface(model) {
