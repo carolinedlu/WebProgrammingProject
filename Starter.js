@@ -55,8 +55,7 @@ function emptyInterface() {
 
 function buildReviewInterface(model) {
 	let body = $('body');
-	body.append('<div id="reviews">');
-	body.append('<h1>Reviews</h1>');
+	body.append('<h1 id="reviewsTitle">Reviews</h1>');
 	const visible_reviews = $('<div id="visible-reviews">');
 	const updateReviews = () => {
 	visible_reviews.empty();
@@ -68,7 +67,7 @@ function buildReviewInterface(model) {
 
 body.append(visible_reviews);
 updateReviews();
-body.append('<h2>Enter a new review of the '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
+body.append('<h2 id="specificReviewTitle">Enter a new review of the '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
 body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button><br><br>');
 
  //   $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
@@ -179,15 +178,21 @@ async function buildAirportsInterface() {
         $("#airportName").remove();
 	$("#videoTitle").remove();
 	$("#video").remove();
-	$("#reviews").empty();
-        let selection = document.getElementById("airportDropDown");
-        let selectionName = selection.options[selection.selectedIndex].value;
-        body.append("<h1 id='airportName'>"+selectionName+"</h1>");
-        for (const port of ports) {
-            if (port.name === selectionName) {
-                buildReviewInterface(port); //Set up review interface for this plane
-                displayVideos(port); //Display Youtube videos for this plane
-            }
-        }
+	$("#reviewsTitle").remove();
+	$("#visible-reviews").remove();
+	$("specificReviewTitle").remove();
+	$("newReview").remove();
+	$("submitNewReview").remove();
+	    
+	    
+//         let selection = document.getElementById("airportDropDown");
+//         let selectionName = selection.options[selection.selectedIndex].value;
+//         body.append("<h1 id='airportName'>"+selectionName+"</h1>");
+//         for (const port of ports) {
+//             if (port.name === selectionName) {
+//                 buildReviewInterface(port); //Set up review interface for this plane
+//                 displayVideos(port); //Display Youtube videos for this plane
+//             }
+//         }
     });
 };
