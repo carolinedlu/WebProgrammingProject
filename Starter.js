@@ -185,14 +185,14 @@ async function buildAirportsInterface() {
 	$("submitNewReview").remove();
 	    
 	    
-//         let selection = document.getElementById("airportDropDown");
-//         let selectionName = selection.options[selection.selectedIndex].value;
-//         body.append("<h1 id='airportName'>"+selectionName+"</h1>");
-//         for (const port of ports) {
-//             if (port.name === selectionName) {
-//                 buildReviewInterface(port); //Set up review interface for this plane
-//                 displayVideos(port); //Display Youtube videos for this plane
-//             }
-//         }
+        let selection = document.getElementById("airportDropDown");
+        let selectionName = selection.options[selection.selectedIndex].value;
+        body.append("<h1 id='airportName'>"+selectionName+"</h1>");
+        for (const port of ports) {
+            if (port.name === selectionName) {
+                buildReviewInterface(port); //Set up review interface for this plane
+                displayVideos(port); //Display Youtube videos for this plane
+            }
+        }
     });
 };
