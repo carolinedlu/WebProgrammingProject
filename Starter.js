@@ -137,6 +137,8 @@ function buildHomeInterface() {
 	      body.append('<div class="homeDiv"></div>');
       $('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>').appendTo('.homeDiv');
       $('<button class="button" onclick="buildModelInterface()">Models</button>').appendTo('.homeDiv');
+	$('<button class="button" onclick="buildMapInterface()">Airports</button>').appendTo('.homeDiv');
+
 };
 
 async function displayVideos(planeObj) {
