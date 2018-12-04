@@ -75,6 +75,7 @@ function buildReviewInterface(model) {
     $('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>').appendTo('.revDiv');
 
     let submit = document.getElementById("submitNewReview");
+console.log(submit);
     submit.addEventListener("click", function submitNewReview() {
          let review = document.getElementById("newReview").value;
          Reviews.Add(model, review);
