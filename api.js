@@ -45,6 +45,10 @@ class Backend {
 		return Ajax.GET(`/tickets?filter[instance_id]=${instance.id}`);
 	}
 
+	static GetAirportById(id) {
+		return Ajax.GET(`/airports/${id}`);
+	}
+
 	static UpdatePlane(plane) {
 		const resource = ResourceFactory.Plane(plane);
 		return Ajax.PUT(`/planes/${plane.id}`, resource);
@@ -72,6 +76,26 @@ class Backend {
 		})));
 
 		return passengers_on_instances;
+	}
+
+	static async GetAirportDeparturesAndArrivalsForPlane(plane) {
+		const flights_on_plane = await Backend.GetFlightsOnPlane(plane);
+
+		const departures_for_flights = [].concat(... await Promise.all(flights_on_plane.map((flight) => {
+			return Backend.GetAirportById(flight.departure_id);
+		})));
+
+		const arrivals_for_flights = [].concat(... await Promise.all(flights_on_plane.map((flight) => {
+			return Backend.GetAirportById(flight.arrival_id);
+		})));
+
+		return departures_for_flights.map((departure, i) => {
+			const arrival = arrivals_for_flights[i];
+			return {
+				departure: departure,
+				arrival: arrival,
+			};
+		});
 	}
 }
 
