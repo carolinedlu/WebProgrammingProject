@@ -89,10 +89,9 @@ body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Rev
 
 var map;
 function initMap() {
-map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-        lat: 35.9100, lng: -79.0533},
-    zoom: 20
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
   });
 }
 
