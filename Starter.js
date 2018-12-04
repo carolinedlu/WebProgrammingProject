@@ -5,7 +5,7 @@ Backend.Authenticate();
 async function buildModelsInterface() {
     emptyInterface();
     let body = $('body');
-    body.append('<h1>Select an airplane model:</h1>');
+    body.append('<h1 class=modelHeader">Select an airplane model:</h1>');
     const models = await Backend.GetPlanes();
      $('body').append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
 
@@ -17,10 +17,14 @@ async function buildModelsInterface() {
     }
 
     let selected_model = null;
+     
+body.append('<div class="menuDiv"></div>');
+  $('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>').appendTo('.menuDiv');
 
-    body.append('<button id="destinations" onclick="buildDestinationsInterface()">Destinations</button>');
-    body.append('<button id="mileage" onclick="buildMileageInterface()">Mileage</button>');
-
+body.append('<div class="newDiv"></div>');
+body.append('<div class="revDiv"></div>');
+	
+	
     const passengers_button = $('<button id="passengers">Passengers</button>').click(() => {
         if (selected_model !== null) {
             buildPassengersInterface(selected_model);
@@ -42,13 +46,20 @@ async function buildModelsInterface() {
     });
 };
 
+ function buildModelInterface() {
+    let body = $('body');
+    $('.models-container').toggle();
+ };
+
 function emptyInterface() {
     let body = $('body');
     body.empty();
-    body.append('<button onclick="buildHomeInterface()">Home</button><br>');
+    body.append('<button class="homeBtn" onclick="buildHomeInterface()">Home</button><br>');
 };
 
 function buildReviewInterface(model) {
+	$('<h1>Reviews</h1>').appendTo('.revDiv');
+
     const visible_reviews = $('<div id="visible-reviews">');
     const updateReviews = () => {
         visible_reviews.empty();
@@ -62,8 +73,9 @@ function buildReviewInterface(model) {
     body.append('<div id="reviews"><h1>Reviews</h1>');
     body.append(visible_reviews);
     updateReviews();
-    body.append('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
-    body.append('<button id="submitNewReview">Submit Review</button></div>');
+    $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
+    $('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>').appendTo('.revDiv');
+
     let submit = document.getElementById("submitNewReview");
     submit.addEventListener("click", function submitNewReview() {
          let review = document.getElementById("newReview").value;
@@ -91,36 +103,29 @@ function buildDestinationsInterface() {
     if (builtInterface === 1) {
         $('.interface').empty();
     }
-    let body = $('body');
-    body.append('<h1 class="interface">Destinations interface here</h1>');
+    $('<h1 class="interface">Destinations interface here</h1>').appendTo('.newDiv');
     builtInterface=1;
 	body.append('<h2 class="interface">Countries</h2>');
-	//body.append('<p class="interface">Display countries here</p>');
 	//body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
-
-	//body.append('<h2 class="interface">Airports</h2>');
-	//body.append('<p class="interface">Display airports here</p>');
 };
 
-function buildMileageInterface() {
-    if (builtInterface === 1) {
-        $('.interface').empty();
-    }
-    let body = $('body');
-    body.append('<h1 class="interface">Mileage interface here</h1>');
-    builtInterface=1;
-	body.append('<h2 class="interface">Display number of miles traveled by this model here</h2>');
-};
+// function buildMileageInterface() {
+//     if (builtInterface === 1) {
+//         $('.interface').empty();
+//     }
+//     $('<h1 class="interface">Mileage interface here</h1>').appendTo('.newDiv');
+//     builtInterface=1;
+// 	body.append('<h2 class="interface">Display number of miles traveled by this model here</h2>');
+// };
 
 function buildPassengersInterface(model) {
     if (builtInterface === 1) {
         $('.interface').empty();
     }
-    let body = $('body');
-    body.append('<h1 class="interface">Passengers interface here</h1>');
+    $('<h1 class="interface">Passengers interface here</h1>').appendTo('.newDiv');
     builtInterface=1;
 
-	const all_passengers = $('<div id="visible-reviews" class="interface">');
+const all_passengers = $('<div id="visible-reviews" class="interface">');
     let passengers_on_plane = [];
     const updatePassengers = () => {
         all_passengers.empty();
@@ -129,8 +134,8 @@ function buildPassengersInterface(model) {
         }
     };
 
-    body.append('<h2>Passengers On This Plane</h2>');
-    body.append(all_passengers);
+    ('<h2>Passengers On This Plane</h2>').appendTo('.newDiv');
+    (all_passengers).appendTo('.newDiv');
     Backend.GetPassengersThatFlewOnPlane(model).then((passengers) => {
         passengers_on_plane = passengers;
         updatePassengers();
@@ -140,8 +145,9 @@ function buildPassengersInterface(model) {
 function buildHomeInterface() {
     let body = $('body');
     body.empty();
-    body.append('<button class="button" onclick="buildModelsInterface()">Models</button>');
-    body.append('<button class="button" onclick="buildMapInterface()">Map</button>');
+	      body.append('<div class="homeDiv"></div>');
+      $('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>').appendTo('.homeDiv');
+      $('<button class="button" onclick="buildModelInterface()">Models</button>').appendTo('.homeDiv');
 };
 
 async function displayVideos(planeObj) {
