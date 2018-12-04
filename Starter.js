@@ -65,12 +65,12 @@ function buildReviewInterface(model) {
         visible_reviews.empty();
         const reviews = Reviews.Get(model);
         for (const review of reviews) {
-            visible_reviews.append(`<p><em>${review}</em></p>`);
+            visible_reviews.append(`<p id="reviews"><em>${review}</em></p>`);
         }
     };
 
 	let body = $('body');
-    body.append('<div id="reviews"><h1>Reviews</h1>');
+    //body.append('<div id="reviews"><h1>Reviews</h1>');
     body.append(visible_reviews);
     updateReviews();
     $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
