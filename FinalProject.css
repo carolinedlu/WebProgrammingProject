@@ -159,8 +159,3 @@ div#buttons-container {
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Lufthansa_Boeing_747-8_%2816093562187%29.jpg/1200px-Lufthansa_Boeing_747-8_%2816093562187%29.jpg");
   background-size: cover;
 }
-
-#map {
-  height: 400px;
-  width: 400px;
-}
