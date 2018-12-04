@@ -104,7 +104,7 @@ function buildDestinationsInterface() {
 //         $('.interface').empty();
 //     }
 	body.append('<h1 class="interface">Destinations</h1>');		
-body.append('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap" async defer></script>');
+body.append('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
  	builtInterface=1;
 	}
 };
