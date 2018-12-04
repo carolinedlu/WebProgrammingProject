@@ -179,7 +179,7 @@ async function buildAirportsInterface() {
         $("#airportName").remove();
 	$("#videoTitle").remove();
 	$("#video").remove();
-	$("#reviews").remove();
+	$("#reviews").empty();
         let selection = document.getElementById("airportDropDown");
         let selectionName = selection.options[selection.selectedIndex].value;
         body.append("<h1 id='airportName'>"+selectionName+"</h1>");
