@@ -73,7 +73,7 @@ function buildReviewInterface(model) {
 
 body.append(visible_reviews);
 updateReviews();
-body.append('<h2>Enter a new review of '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
+body.append('<h2>Enter a new review of the '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
 body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>');
 
  //   $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
@@ -160,7 +160,7 @@ async function displayVideos(planeObj) {
 
     let url = await YouTube.GetTopVideoForPlane(planeObj);
 	console.log(planeObj);
-   	body.append('<h1>Videos of '+name+'<h1>');
+   	body.append('<h1>Videos of the '+name+'<h1>');
 	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
 };
 
