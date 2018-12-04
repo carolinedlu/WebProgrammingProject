@@ -29,6 +29,22 @@ class Backend {
 		return Ajax.GET(`/tickets`);
 	}
 
+	static GetInstances() {
+		return Ajax.GET(`/instances`);
+	}
+
+	static GetFlightsOnPlane(plane) {
+		return Ajax.GET(`/flights?filter[plane_id]=${plane.id}`);
+	}
+
+	static GetInstancesForFlight(flight) {
+		return Ajax.GET(`/instances?filter[flight_id]=${flight.id}`);
+	}
+
+	static GetPassengersOnInstance(instance) {
+		return Ajax.GET(`/tickets?filter[instance_id]=${instance.id}`);
+	}
+
 	static UpdatePlane(plane) {
 		const resource = ResourceFactory.Plane(plane);
 		return Ajax.PUT(`/planes/${plane.id}`, resource);
@@ -42,6 +58,20 @@ class Backend {
 	static AddPassenger(passenger) {
 		const resource = ResourceFactory.Ticket(passenger);
 		return Ajax.POST(`/tickets`, resource);
+	}
+
+	static async GetPassengersThatFlewOnPlane(plane) {
+		const flights_on_plane = await Backend.GetFlightsOnPlane(plane);
+
+		const instances_for_flights = [].concat(... await Promise.all(flights_on_plane.map((flight) => {
+			return Backend.GetInstancesForFlight(flight);
+		})));
+
+		const passengers_on_instances = [].concat(... await Promise.all(instances_for_flights.map((instance) => {
+			return Backend.GetPassengersOnInstance(instance);
+		})));
+
+		return passengers_on_instances;
 	}
 }
 

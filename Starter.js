@@ -16,9 +16,17 @@ async function buildModelsInterface() {
         document.getElementById("dropDown").options.add(option); //Add plane to drop-down menu
     }
 
+    let selected_model = null;
+
     body.append('<button id="destinations" onclick="buildDestinationsInterface()">Destinations</button>');
     body.append('<button id="mileage" onclick="buildMileageInterface()">Mileage</button>');
-    body.append('<button id="passengers" onclick="buildPassengersInterface()">Passengers</button>');
+
+    const passengers_button = $('<button id="passengers">Passengers</button>').click(() => {
+        if (selected_model !== null) {
+            buildPassengersInterface(selected_model);
+        }
+    });
+    body.append(passengers_button);
 
     $("#dropDown").change(function planeObject(){ //Every time user selects a different plane
         for (const model of models) { //Why is this loop not running?!?!?!?
@@ -26,6 +34,7 @@ async function buildModelsInterface() {
             let selectionName = selection.options[selection.selectedIndex].value;
             if (model.name === selectionName) {
                 console.log("success");
+                selected_model = model;
                 buildReviewInterface(model); //Set up review interface for this plane
                 displayVideos(model); //Display Youtube videos for this plane
             }
@@ -92,14 +101,29 @@ function buildMileageInterface() {
 	body.append('<h2 class="interface">Display number of miles traveled by this model here</h2>');
 };
 
-function buildPassengersInterface() {
+function buildPassengersInterface(model) {
     if (builtInterface === 1) {
         $('.interface').empty();
     }
     let body = $('body');
     body.append('<h1 class="interface">Passengers interface here</h1>');
     builtInterface=1;
-	body.append('<h2 class="interface">Display number of passengers that have rode on this model here</h2>');
+
+	const all_passengers = $('<div id="visible-reviews" class="interface">');
+    let passengers_on_plane = [];
+    const updatePassengers = () => {
+        all_passengers.empty();
+        for (const passenger of passengers_on_plane) {
+            all_passengers.append(`<p><em>${passenger.first_name} ${passenger.last_name}</em></p>`);
+        }
+    };
+
+    body.append('<h2>Passengers On This Plane</h2>');
+    body.append(all_passengers);
+    Backend.GetPassengersThatFlewOnPlane(model).then((passengers) => {
+        passengers_on_plane = passengers;
+        updatePassengers();
+    });
 };
 
 function buildHomeInterface() {
