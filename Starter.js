@@ -107,8 +107,7 @@ function buildDestinationsInterface() {
     }
     $('<h1 class="interface">Destinations interface here</h1>').appendTo('.newDiv');
     builtInterface=1;
-	body.append('<h2 class="interface">Countries</h2>');
-	//body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
+body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
 };
 
 // function buildPassengersInterface(model) {
