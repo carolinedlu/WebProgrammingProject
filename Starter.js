@@ -1,10 +1,9 @@
 var builtInterface = 0;
-var body = $('body');
-
 
 Backend.Authenticate();
 
 async function buildModelsInterface() {
+let body = $('body');
     emptyInterface();
     body.append('<h1 class=modelHeader">Select an airplane model:</h1>');
     const models = await Backend.GetPlanes();
@@ -47,15 +46,21 @@ body.append('<div class="revDiv"></div>');
 };
 
  function buildModelInterface() {
+	 let body = $('body');
+
     $('.models-container').toggle();
  };
 
 function emptyInterface() {
+	let body = $('body');
+
     body.empty();
     body.append('<button class="homeBtn" onclick="buildHomeInterface()">Home</button><br>');
 };
 
 function buildReviewInterface(model) {
+	let body = $('body');
+
 	body.append('<h1>Reviews</h1>');
 	const visible_reviews = $('<div id="visible-reviews">');
 	const updateReviews = () => {
@@ -90,6 +95,8 @@ body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Rev
 
 var map;
 function initMap(lat, lng) {
+	let body = $('body');
+
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
         lat: 35.9100, lng: -79.0533},
@@ -98,6 +105,8 @@ function initMap(lat, lng) {
 }
 
 function buildDestinationsInterface() {
+	let body = $('body');
+
     if (builtInterface === 1) {
         $('.interface').empty();
     }
@@ -131,6 +140,8 @@ function buildDestinationsInterface() {
 // };
 
 function buildHomeInterface() {
+	let body = $('body');
+
 	body.empty();
 	body.append('<div class="homeDiv"></div>');
 	body.append('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>');
@@ -143,6 +154,8 @@ function buildHomeInterface() {
 };
 
 async function displayVideos(planeObj) {
+	let body = $('body');
+
     let url = await YouTube.GetTopVideoForPlane(planeObj);
     body.append('<h1>Videos of '+planObj.planeName+'<h1>');
 	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
@@ -150,6 +163,8 @@ async function displayVideos(planeObj) {
 
 
 async function buildAirportsInterface() {
+	let body = $('body');
+
     emptyInterface();
     const ports = await Backend.GetAirports();
     body.append('<select id="airportDropDown"><option selected="true" disabled="true">Select an airport</option></select>');
