@@ -40,16 +40,32 @@ function emptyInterface() {
 };
 
 function buildReviewInterface(model) {
+    const visible_reviews = $('<div id="visible-reviews">');
+    const updateReviews = () => {
+        visible_reviews.empty();
+        const reviews = Reviews.Get(model);
+        for (const review of reviews) {
+            visible_reviews.append(`<p><em>${review}</em></p>`);
+        }
+    };
+
 	let body = $('body');
     body.append('<div id="reviews"><h1>Reviews</h1>');
-    body.append('<p>Display excerpts from reviews here</p>');
+    body.append(visible_reviews);
+    updateReviews();
     body.append('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
     body.append('<button id="submitNewReview">Submit Review</button></div>');
     let submit = document.getElementById("submitNewReview");
     submit.addEventListener("click", function submitNewReview() {
          let review = document.getElementById("newReview").value;
          Reviews.Add(model, review);
-         alert("Thanks for your input. Your review has been added.");
+         Backend.UpdatePlane(model).then(() => {
+            updateReviews();
+         }).catch(() => {
+            alert("There was an error adding your review. Please try resubmitting.");
+         });
+
+
     }, false);
 };
 
