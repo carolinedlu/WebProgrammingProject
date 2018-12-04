@@ -31,7 +31,6 @@ async function buildModelsInterface() {
     //body.append(passengers_button);
 
     $("#dropDown").change(function planeObject(){ //Every time user selects a different plane
-        for (const model of models) {
 		$("#videoTitle").remove();
 		$("#video").remove();
 		$("#reviewsTitle").remove();
@@ -39,9 +38,13 @@ async function buildModelsInterface() {
 		$("#specificReviewTitle").remove();
 		$("#newReview").remove();
 		$("#submitNewReview").remove();
+	    	$("#planeName").remove();
 		
             let selection = document.getElementById("dropDown");
             let selectionName = selection.options[selection.selectedIndex].value;
+	    body.append("<h1 id='planeName'>"+selectionName+"</h1>");
+	    
+	    for (const model of models) {
             if (model.name === selectionName) {
                 selected_model = model;
                 buildReviewInterface(model); //Set up review interface for this plane
@@ -62,6 +65,7 @@ function emptyInterface() {
 };
 
 function buildReviewInterface(model) {
+	console.log("reviews method called");
 	let body = $('body');
 	body.append('<h1 id="reviewsTitle">Reviews</h1>');
 	const visible_reviews = $('<div id="visible-reviews">');
