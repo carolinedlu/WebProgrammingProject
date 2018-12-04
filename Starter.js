@@ -78,6 +78,15 @@ function buildReviewInterface(model) {
     }, false);
 };
 
+var map;
+function initMap(lat, lng) {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+        lat: 35.9100, lng: -79.0533},
+    zoom: 8
+  });
+}
+
 function buildDestinationsInterface() {
     if (builtInterface === 1) {
         $('.interface').empty();
@@ -86,9 +95,11 @@ function buildDestinationsInterface() {
     body.append('<h1 class="interface">Destinations interface here</h1>');
     builtInterface=1;
 	body.append('<h2 class="interface">Countries</h2>');
-	body.append('<p class="interface">Display countries here</p>');
-	body.append('<h2 class="interface">Airports</h2>');
-	body.append('<p class="interface">Display airports here</p>');
+	//body.append('<p class="interface">Display countries here</p>');
+	body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
+
+	//body.append('<h2 class="interface">Airports</h2>');
+	//body.append('<p class="interface">Display airports here</p>');
 };
 
 function buildMileageInterface() {
