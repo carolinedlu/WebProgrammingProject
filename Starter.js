@@ -9,7 +9,7 @@ async function buildModelsInterface() {
     const models = await Backend.GetPlanes();
      $('body').append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
 
-    for (const model of models) { //Why is this loop not running?!?!?!?
+    for (const model of models) {
         let option = document.createElement("option");
         option.text = model.name;
         option.value = model.name;
@@ -19,7 +19,7 @@ async function buildModelsInterface() {
     let selected_model = null;
      
 body.append('<div class="menuDiv"></div>');
-//  $('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>').appendTo('.menuDiv');
+$('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>').appendTo('.menuDiv');
 
 body.append('<div class="newDiv"></div>');
 body.append('<div class="revDiv"></div>');
@@ -32,7 +32,7 @@ body.append('<div class="revDiv"></div>');
     //body.append(passengers_button);
 
     $("#dropDown").change(function planeObject(){ //Every time user selects a different plane
-        for (const model of models) { //Why is this loop not running?!?!?!?
+        for (const model of models) {
             let selection = document.getElementById("dropDown");
             let selectionName = selection.options[selection.selectedIndex].value;
             if (model.name === selectionName) {
@@ -71,7 +71,7 @@ function buildReviewInterface(model) {
 	let body = $('body');
     body.append(visible_reviews);
     updateReviews();
-body.append('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
+body.append('<h2>Enter a new review of '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
 body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>');
 
  //   $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
