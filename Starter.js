@@ -87,14 +87,6 @@ body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Rev
     }, false);
 };
 
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
-}
-
 function buildDestinationsInterface() {
 	console.log(builtInterface);
 	if (builtInterface === 0) {
@@ -103,12 +95,19 @@ function buildDestinationsInterface() {
 // if (builtInterface === 1) {
 //         $('.interface').empty();
 //     }
-	body.append('<h1 class="interface">Destinations</h1>');	
-		
+body.append('<h1 class="interface">Destinations</h1>');	
 body.append('<div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
  	builtInterface=1;
 	}
 };
+
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
 
 // function buildPassengersInterface(model) {
 //     if (builtInterface === 1) {
