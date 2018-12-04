@@ -7,7 +7,7 @@ async function buildModelsInterface() {
     let body = $('body');
     body.append('<h1 class=modelHeader">Select an airplane model:</h1>');
     const models = await Backend.GetPlanes();
-     $('body').append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
+    body.append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
 
     for (const model of models) {
         let option = document.createElement("option");
@@ -19,7 +19,7 @@ async function buildModelsInterface() {
     let selected_model = null;
      
 body.append('<div class="menuDiv"></div>');
-$('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>').appendTo('.menuDiv');
+body.append('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>');
 
 body.append('<div class="newDiv"></div>');
 body.append('<div class="revDiv"></div>');
@@ -57,7 +57,8 @@ function emptyInterface() {
 };
 
 function buildReviewInterface(model) {
-	$('<h1>Reviews</h1>').appendTo('.revDiv');
+	body.append('<h1>Reviews</h1>');
+	//$('<h1>Reviews</h1>').appendTo('.revDiv');
 
     const visible_reviews = $('<div id="visible-reviews">');
     const updateReviews = () => {
@@ -68,9 +69,9 @@ function buildReviewInterface(model) {
         }
     };
 
-	let body = $('body');
-    body.append(visible_reviews);
-    updateReviews();
+let body = $('body');
+body.append(visible_reviews);
+updateReviews();
 body.append('<h2>Enter a new review of '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
 body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>');
 
@@ -78,7 +79,6 @@ body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Rev
  //   $('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>').appendTo('.revDiv');
 
     let submit = document.getElementById("submitNewReview");
-console.log(submit);
     submit.addEventListener("click", function submitNewReview() {
          let review = document.getElementById("newReview").value;
          Reviews.Add(model, review);
@@ -140,9 +140,12 @@ function buildHomeInterface() {
     let body = $('body');
     body.empty();
 	      body.append('<div class="homeDiv"></div>');
-      $('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>').appendTo('.homeDiv');
-      $('<button class="button" onclick="buildModelsInterface()">Models</button>').appendTo('.homeDiv');
-	$('<button class="button" onclick="buildAirportsInterface()">Airports</button>').appendTo('.homeDiv');
+body.append('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>');
+body.append('<button class="button" onclick="buildModelsInterface()">Models</button>');
+body.append('<button class="button" onclick="buildAirportsInterface()">Airports</button>');
+      //$('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>').appendTo('.homeDiv');
+      //$('<button class="button" onclick="buildModelsInterface()">Models</button>').appendTo('.homeDiv');
+	//$('<button class="button" onclick="buildAirportsInterface()">Airports</button>').appendTo('.homeDiv');
 
 };
 
