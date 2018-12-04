@@ -159,7 +159,7 @@ async function displayVideos(planeObj) {
 
     let url = await YouTube.GetTopVideoForPlane(planeObj);
 	console.log(planeObj);
-   // body.append('<h1>Videos of '+planObj.planeName+'<h1>');
+   	body.append('<h1>Videos of '+planObj.name+'<h1>');
 	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
 };
 
