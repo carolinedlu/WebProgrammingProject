@@ -55,6 +55,7 @@ function emptyInterface() {
 
 function buildReviewInterface(model) {
 	let body = $('body');
+	body.append('<div id="reviews">');
 	body.append('<h1>Reviews</h1>');
 	const visible_reviews = $('<div id="visible-reviews">');
 	const updateReviews = () => {
@@ -85,6 +86,7 @@ body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Rev
 
 
     }, false);
+	body.append('</div>');
 };
 
 function buildDestinationsInterface() {
@@ -177,6 +179,7 @@ async function buildAirportsInterface() {
         $("#airportName").remove();
 	$("#videoTitle").remove();
 	$("#video").remove();
+	$("#reviews").remove();
         let selection = document.getElementById("airportDropDown");
         let selectionName = selection.options[selection.selectedIndex].value;
         body.append("<h1 id='airportName'>"+selectionName+"</h1>");
