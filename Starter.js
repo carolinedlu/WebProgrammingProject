@@ -80,7 +80,7 @@ function buildReviewInterface(model) {
 body.append(visible_reviews);
 updateReviews();
 body.append('<h2 id="specificReviewTitle">Enter a new review of the '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
-body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>');
+body.append('<button id="submitNewReview">Submit Review</button>');
 
  //   $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
  //   $('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>').appendTo('.revDiv');
