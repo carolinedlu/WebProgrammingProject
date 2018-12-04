@@ -180,9 +180,9 @@ async function buildAirportsInterface() {
 	$("#video").remove();
 	$("#reviewsTitle").remove();
 	$("#visible-reviews").remove();
-	$("specificReviewTitle").remove();
-	$("newReview").remove();
-	$("submitNewReview").remove();
+	$("#specificReviewTitle").remove();
+	$("#newReview").remove();
+	$("#submitNewReview").remove();
 	    
 	    
         let selection = document.getElementById("airportDropDown");
