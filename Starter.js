@@ -57,13 +57,12 @@ function emptyInterface() {
 };
 
 function buildReviewInterface(model) {
+	let body = $('body');
 	body.append('<h1>Reviews</h1>');
-	//$('<h1>Reviews</h1>').appendTo('.revDiv');
-
-    const visible_reviews = $('<div id="visible-reviews">');
-    const updateReviews = () => {
-        visible_reviews.empty();
-        const reviews = Reviews.Get(model);
+	const visible_reviews = $('<div id="visible-reviews">');
+	const updateReviews = () => {
+	visible_reviews.empty();
+	const reviews = Reviews.Get(model);
         for (const review of reviews) {
             visible_reviews.append(`<p id="reviews"><em>${review}</em></p>`);
         }
