@@ -156,10 +156,11 @@ function buildHomeInterface() {
 
 async function displayVideos(planeObj) {
 	let body = $('body');
+	let name = planeObj.name;
 
     let url = await YouTube.GetTopVideoForPlane(planeObj);
 	console.log(planeObj);
-   	body.append('<h1>Videos of '+planObj.name+'<h1>');
+   	body.append('<h1>Videos of '+name+'<h1>');
 	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
 };
 
