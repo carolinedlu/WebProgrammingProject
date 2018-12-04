@@ -102,12 +102,14 @@ function initMap(lat, lng) {
 }
 
 function buildDestinationsInterface() {
+	let body = $('body');
+
     if (builtInterface === 1) {
         $('.interface').empty();
     }
     $('<h1 class="interface">Destinations interface here</h1>').appendTo('.newDiv');
     builtInterface=1;
-    $('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>').appendTo('.newDiv');
+    body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
 };
 
 // function buildPassengersInterface(model) {
@@ -147,7 +149,7 @@ function buildHomeInterface() {
 async function displayVideos(planeObj) {
     let url = await YouTube.GetTopVideoForPlane(planeObj);
     let body = $('body');
-    body.append('<p>View videos here<p>');
+    body.append('<h1>Videos of '+planObj.planeName+'<h1>');
 	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
 };
 
