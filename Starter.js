@@ -96,7 +96,7 @@ function buildDestinationsInterface() {
     builtInterface=1;
 	body.append('<h2 class="interface">Countries</h2>');
 	//body.append('<p class="interface">Display countries here</p>');
-	body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
+	//body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
 
 	//body.append('<h2 class="interface">Airports</h2>');
 	//body.append('<p class="interface">Display airports here</p>');
