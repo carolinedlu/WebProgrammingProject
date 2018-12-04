@@ -88,17 +88,17 @@ body.append('<button id="submitNewReview" onclick="submitNewReview()">Submit Rev
 };
 
 function buildDestinationsInterface() {
-	console.log(builtInterface);
-	if (builtInterface === 0) {
+	//console.log(builtInterface);
+	//if (builtInterface === 0) {
 	let body = $('body');
 
 // if (builtInterface === 1) {
 //         $('.interface').empty();
 //     }
-body.append('<h1 class="interface">Destinations</h1>');	
+//body.append('<h1 class="interface">Destinations</h1>');	
 body.append('<div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
- 	builtInterface=1;
-	}
+ 	//builtInterface=1;
+	//}
 };
 
 var map;
