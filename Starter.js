@@ -19,18 +19,17 @@ async function buildModelsInterface() {
     let selected_model = null;
      
 body.append('<div class="menuDiv"></div>');
-  $('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>').appendTo('.menuDiv');
+//  $('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>').appendTo('.menuDiv');
 
 body.append('<div class="newDiv"></div>');
 body.append('<div class="revDiv"></div>');
 	
-	
-    const passengers_button = $('<button id="passengers">Passengers</button>').click(() => {
-        if (selected_model !== null) {
-            buildPassengersInterface(selected_model);
-        }
-    });
-    body.append(passengers_button);
+   // const passengers_button = $('<button id="passengers">Passengers</button>').click(() => {
+    //    if (selected_model !== null) {
+     //       buildPassengersInterface(selected_model);
+      //  }
+    //});
+    //body.append(passengers_button);
 
     $("#dropDown").change(function planeObject(){ //Every time user selects a different plane
         for (const model of models) { //Why is this loop not running?!?!?!?
@@ -70,7 +69,6 @@ function buildReviewInterface(model) {
     };
 
 	let body = $('body');
-    //body.append('<div id="reviews"><h1>Reviews</h1>');
     body.append(visible_reviews);
     updateReviews();
     $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
@@ -109,38 +107,29 @@ function buildDestinationsInterface() {
 	//body.append('<br><div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
 };
 
-// function buildMileageInterface() {
+// function buildPassengersInterface(model) {
 //     if (builtInterface === 1) {
 //         $('.interface').empty();
 //     }
-//     $('<h1 class="interface">Mileage interface here</h1>').appendTo('.newDiv');
+//     $('<h1 class="interface">Passengers interface here</h1>').appendTo('.newDiv');
 //     builtInterface=1;
-// 	body.append('<h2 class="interface">Display number of miles traveled by this model here</h2>');
+
+// const all_passengers = $('<div id="visible-reviews" class="interface">');
+//     let passengers_on_plane = [];
+//     const updatePassengers = () => {
+//         all_passengers.empty();
+//         for (const passenger of passengers_on_plane) {
+//             all_passengers.append(`<p><em>${passenger.first_name} ${passenger.last_name}</em></p>`);
+//         }
+//     };
+
+//     ('<h2>Passengers On This Plane</h2>').appendTo('.newDiv');
+//     (all_passengers).appendTo('.newDiv');
+//     Backend.GetPassengersThatFlewOnPlane(model).then((passengers) => {
+//         passengers_on_plane = passengers;
+//         updatePassengers();
+//     });
 // };
-
-function buildPassengersInterface(model) {
-    if (builtInterface === 1) {
-        $('.interface').empty();
-    }
-    $('<h1 class="interface">Passengers interface here</h1>').appendTo('.newDiv');
-    builtInterface=1;
-
-const all_passengers = $('<div id="visible-reviews" class="interface">');
-    let passengers_on_plane = [];
-    const updatePassengers = () => {
-        all_passengers.empty();
-        for (const passenger of passengers_on_plane) {
-            all_passengers.append(`<p><em>${passenger.first_name} ${passenger.last_name}</em></p>`);
-        }
-    };
-
-    ('<h2>Passengers On This Plane</h2>').appendTo('.newDiv');
-    (all_passengers).appendTo('.newDiv');
-    Backend.GetPassengersThatFlewOnPlane(model).then((passengers) => {
-        passengers_on_plane = passengers;
-        updatePassengers();
-    });
-};
 
 function buildHomeInterface() {
     let body = $('body');
@@ -155,4 +144,32 @@ async function displayVideos(planeObj) {
     let body = $('body');
     body.append('<p>View videos here<p>');
 	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
+};
+
+
+async function buildAirportsInterface() {
+    emptyInterface();
+    const ports = await Backend.GetAirports();
+    let body = $('body');
+    body.append('<select id="airportDropDown"><option selected="true" disabled="true">Select an airport</option></select>');
+
+    for (const port of ports) {
+        let option = document.createElement("option");     
+        option.text = port.name;
+        option.value = port.name;
+        document.getElementById("airportDropDown").options.add(option); //Add airport to drop-down menu
+    }
+
+    $("#airportDropDown").change(function selectAirport(){ //Every time user selects a different airport
+        $("#airportName").remove();
+        let selection = document.getElementById("airportDropDown");
+        let selectionName = selection.options[selection.selectedIndex].value;
+        body.append("<h1 id='airportName'>"+selectionName+"</h1>");
+        for (const port of ports) {
+            if (port.name === selectionName) {
+                buildReviewInterface(port); //Set up review interface for this plane
+                displayVideos(port); //Display Youtube videos for this plane
+            }
+        }
+    });
 };
