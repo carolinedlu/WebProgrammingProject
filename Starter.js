@@ -1,10 +1,11 @@
 var builtInterface = 0;
+var body = $('body');
+
 
 Backend.Authenticate();
 
 async function buildModelsInterface() {
     emptyInterface();
-    let body = $('body');
     body.append('<h1 class=modelHeader">Select an airplane model:</h1>');
     const models = await Backend.GetPlanes();
     body.append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
@@ -46,18 +47,15 @@ body.append('<div class="revDiv"></div>');
 };
 
  function buildModelInterface() {
-    let body = $('body');
     $('.models-container').toggle();
  };
 
 function emptyInterface() {
-    let body = $('body');
     body.empty();
     body.append('<button class="homeBtn" onclick="buildHomeInterface()">Home</button><br>');
 };
 
 function buildReviewInterface(model) {
-	let body = $('body');
 	body.append('<h1>Reviews</h1>');
 	const visible_reviews = $('<div id="visible-reviews">');
 	const updateReviews = () => {
@@ -68,7 +66,6 @@ function buildReviewInterface(model) {
         }
     };
 
-let body = $('body');
 body.append(visible_reviews);
 updateReviews();
 body.append('<h2>Enter a new review of '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
@@ -101,8 +98,6 @@ function initMap(lat, lng) {
 }
 
 function buildDestinationsInterface() {
-	let body = $('body');
-
     if (builtInterface === 1) {
         $('.interface').empty();
     }
@@ -136,12 +131,11 @@ function buildDestinationsInterface() {
 // };
 
 function buildHomeInterface() {
-    let body = $('body');
-    body.empty();
-	      body.append('<div class="homeDiv"></div>');
-body.append('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>');
-body.append('<button class="button" onclick="buildModelsInterface()">Models</button>');
-body.append('<button class="button" onclick="buildAirportsInterface()">Airports</button>');
+	body.empty();
+	body.append('<div class="homeDiv"></div>');
+	body.append('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>');
+	body.append('<button class="button" onclick="buildModelsInterface()">Models</button>');
+	body.append('<button class="button" onclick="buildAirportsInterface()">Airports</button>');
       //$('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>').appendTo('.homeDiv');
       //$('<button class="button" onclick="buildModelsInterface()">Models</button>').appendTo('.homeDiv');
 	//$('<button class="button" onclick="buildAirportsInterface()">Airports</button>').appendTo('.homeDiv');
@@ -150,7 +144,6 @@ body.append('<button class="button" onclick="buildAirportsInterface()">Airports<
 
 async function displayVideos(planeObj) {
     let url = await YouTube.GetTopVideoForPlane(planeObj);
-    let body = $('body');
     body.append('<h1>Videos of '+planObj.planeName+'<h1>');
 	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
 };
@@ -159,7 +152,6 @@ async function displayVideos(planeObj) {
 async function buildAirportsInterface() {
     emptyInterface();
     const ports = await Backend.GetAirports();
-    let body = $('body');
     body.append('<select id="airportDropDown"><option selected="true" disabled="true">Select an airport</option></select>');
 
     for (const port of ports) {
