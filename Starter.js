@@ -153,8 +153,8 @@ async function displayVideos(planeObj) {
 
     let url = await YouTube.GetTopVideoForPlane(planeObj);
 	console.log(planeObj);
-   	body.append('<h1>Videos of the '+name+'<h1>');
-	body.append('<br><br><iframe class="interface" width="420" height="345" src='+url+'></iframe>');
+   	body.append('<h1 id="videoTitle">Videos of the '+name+'<h1>');
+	body.append('<br><br><iframe id="video" class="interface" width="420" height="345" src='+url+'></iframe>');
 };
 
 
@@ -173,7 +173,10 @@ async function buildAirportsInterface() {
     }
 
     $("#airportDropDown").change(function selectAirport(){ //Every time user selects a different airport
+	    console.log("changed selection");
         $("#airportName").remove();
+	$("#videoTitle").remove();
+	$("#video").remove();
         let selection = document.getElementById("airportDropDown");
         let selectionName = selection.options[selection.selectedIndex].value;
         body.append("<h1 id='airportName'>"+selectionName+"</h1>");
