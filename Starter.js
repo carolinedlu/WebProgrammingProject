@@ -32,6 +32,14 @@ async function buildModelsInterface() {
 
     $("#dropDown").change(function planeObject(){ //Every time user selects a different plane
         for (const model of models) {
+		$("#videoTitle").remove();
+		$("#video").remove();
+		$("#reviewsTitle").remove();
+		$("#visible-reviews").remove();
+		$("#specificReviewTitle").remove();
+		$("#newReview").remove();
+		$("#submitNewReview").remove();
+		
             let selection = document.getElementById("dropDown");
             let selectionName = selection.options[selection.selectedIndex].value;
             if (model.name === selectionName) {
