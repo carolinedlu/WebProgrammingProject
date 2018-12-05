@@ -105,7 +105,7 @@ function buildDestinationsInterface(model) {
 	//if (builtInterface === 0) {
     let body = $('body');
     body.append('<div id="map"></div><br><br>Hello');
-    body.append('Hello<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap" async defer></script>');
+    body.append('Hello<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
 
 // if (builtInterface === 1) {
 //         $('.interface').empty();
