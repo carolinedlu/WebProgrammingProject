@@ -41,6 +41,7 @@ async function buildModelsInterface() {
 	    	$("#spaces").remove();
 	    	$("#map").remove();
 	    	$("#mapAPI").remove();
+	    	$("#spacesAfterMap").remove();
 		
             let selection = document.getElementById("dropDown");
             let selectionName = selection.options[selection.selectedIndex].value;
@@ -108,9 +109,13 @@ function buildDestinationsInterface(model) {
     let body = $('body');
 	body.append('<p id="spaces"><br><br><br></p>');
 
-    body.append('<div id="map">Destinations</div>');
+    body.append('<div id="map"></div>');
+    body.append('<h1>Destinations</h1>');
+
 
     body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
+
+body.append('<p id="spacesAfterMap"><br><br><br></p>');
 
 // if (builtInterface === 1) {
 //         $('.interface').empty();
@@ -204,7 +209,8 @@ async function buildAirportsInterface() {
 	$("#submitNewReview").remove();
 	$("#spaces").remove();
 	$("#map").remove();
-	$("#mapAPI").remove();    
+	$("#mapAPI").remove();
+	$("#spacesAfterMap").remove();
 	    
         let selection = document.getElementById("airportDropDown");
         let selectionName = selection.options[selection.selectedIndex].value;
