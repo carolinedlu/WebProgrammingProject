@@ -34,9 +34,7 @@ async function buildModelsInterface() {
 		$("#video").remove();
 		$("#reviewsTitle").remove();
 		$("#visible-reviews").remove();
-		$("#specificReviewTitle").remove();
-		$("#newReview").remove();
-		$("#submitNewReview").remove();
+		$("#review-form").remove();
 	    	$("#planeName").remove();
 	    	$("#spaces").remove();
 	    	$("#map").remove();
@@ -74,16 +72,17 @@ function buildReviewInterface(model) {
 	let body = $('body');
 	body.append('<h1 id="reviewsTitle">Reviews</h1>');
 	const visible_reviews = $('<div id="visible-reviews">');
-	const updateReviews = () => {
-	visible_reviews.empty();
-	const reviews = Reviews.Get(model);
-        for (const review of reviews) {
+	const updateReviews = async () => {
+	    visible_reviews.empty();
+        const reviews = Reviews.Get(model);
+        const fake_reviews = await GetFakePassengerReviews(model);
+        for (const review of fake_reviews.concat(reviews)) {
             visible_reviews.append(`<p id="reviews"><em>${review.text}</em> ~ ${review.name}</p>`);
         }
     };
 
-body.append(visible_reviews);
-updateReviews();
+    body.append(visible_reviews);
+    updateReviews();
     const review_form = $('<div id="review-form">');
     body.append(review_form);
 
@@ -146,29 +145,28 @@ function changeMapFocus(lat, long) {
     map.setCenter(new google.maps.LatLng(lat, long) );
 };
 
-// function buildPassengersInterface(model) {
-//     if (builtInterface === 1) {
-//         $('.interface').empty();
-//     }
-//     $('<h1 class="interface">Passengers interface here</h1>').appendTo('.newDiv');
-//     builtInterface=1;
+async function GetFakePassengerReviews(model) {
+    const fake_reviews = [
+        `Thank you airport, very cool!!!`,
+        `I saw a rat eating a pizza. Will definitely be returning in the near future.`,
+        `Okay, I guess, nothing compared to the Hard Rock Cafe though.`,
+        `The flight was okay, but the greedy pilot wouldn't let me drive. I just wanted to fly for five minutes, Captain Steve!!!`,
+        `Loved the flight attendants, but I sat next to some guy named KMP, and he wouldn't stop asking me to give him a review on rate my professor dot com???`,
+        `So what's the deal with airline food anyway?`,
+        `Back in my day you had to train a dragon to fly you from city to city, today's kids are so spoiled.`,
+        `Turns out, you CAN'T just get up during a flight and break into dance and song. 10/10 for the lovely flight staff, the cabin they put me in was quite spacious :).`,
+        `There was a bar. 14/10.`,
+        `The only thing I'd change about this place is if they were to allow my emotional support emu.`
+    ];
 
-// const all_passengers = $('<div id="visible-reviews" class="interface">');
-//     let passengers_on_plane = [];
-//     const updatePassengers = () => {
-//         all_passengers.empty();
-//         for (const passenger of passengers_on_plane) {
-//             all_passengers.append(`<p><em>${passenger.first_name} ${passenger.last_name}</em></p>`);
-//         }
-//     };
-
-//     ('<h2>Passengers On This Plane</h2>').appendTo('.newDiv');
-//     (all_passengers).appendTo('.newDiv');
-//     Backend.GetPassengersThatFlewOnPlane(model).then((passengers) => {
-//         passengers_on_plane = passengers;
-//         updatePassengers();
-//     });
-// };
+    const passengers = await Backend.GetPassengersThatFlewOnPlane(model);
+    return passengers.map((passenger) => {
+        return {
+            name: `${passenger.first_name} ${passenger.last_name}`,
+            text: fake_reviews[Math.floor(Math.random() * fake_reviews.length)],
+        };
+    });
+}
 
 function buildHomeInterface() {
 	let body = $('body');
