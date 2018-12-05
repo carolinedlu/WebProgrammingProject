@@ -114,13 +114,29 @@ function buildDestinationsInterface(model) {
     body.append('<p id="spacesAfterMap"><br><br></p>');
 };
 
+function buildAirportsMapInterface(airport) {
+    let body = $('body');
+    body.append('<p id="spaces"><br><br><br></p>');
+    body.append('<h1 id="destinationsTitle">Map</h1>');
+    body.append('<div id="map"></div>');
+    body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
+    body.append('<p id="spacesAfterMap"><br><br></p>');
+    currentAirport = airport;
+};
+
 var map;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 35.9100, lng: -79.0533},
-    zoom: 18
+    zoom: 15
   });
-}
+  changeMapFocus(currentAirport.latitude, currentAirport.longitude);
+};
+
+function changeMapFocus(lat, long) {
+    //console.log(lat);
+    map.setCenter(new google.maps.LatLng(lat, long) );
+};
 
 // function buildPassengersInterface(model) {
 //     if (builtInterface === 1) {
@@ -186,7 +202,6 @@ async function buildAirportsInterface() {
     }
 
     $("#airportDropDown").change(function selectAirport(){ //Every time user selects a different airport
-	    console.log("changed selection");
         $("#airportName").remove();
 	$("#videoTitle").remove();
 	$("#video").remove();
@@ -208,6 +223,8 @@ async function buildAirportsInterface() {
             if (port.name === selectionName) {
                 buildReviewInterface(port); //Set up review interface for this plane
                 displayVideos(port); //Display Youtube videos for this plane
+		buildAirportsMapInterface(port);
+
             }
         }
     });
