@@ -49,10 +49,10 @@ async function buildModelsInterface() {
 
 	    for (const model of models) {
             if (model.name === selectionName) {
+		buildDestinationsInterface(model);
                 selected_model = model;
                 buildReviewInterface(model); //Set up review interface for this plane
                 displayVideos(model); //Display Youtube videos for this plane
-		buildDestinationsInterface(model);
             }
         }
     });
@@ -121,6 +121,19 @@ function buildDestinationsInterface(model) {
     body.append('<div id="map"></div>');
     body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
     body.append('<p id="spacesAfterMap"><br><br></p>');
+	
+    Backend.GetAirportDeparturesAndArrivalsForPlane(plane).then((flights) => {
+        var i = 0;
+        for (const flight of flights) {
+            if (i < flights.length) {
+            // Can also use flight.departure.latitude and flight.departure.longitude
+            const latitude = parseFloat(flight.arrival.latitude);
+            const longitude = parseFloat(flight.arrival.longitude);
+            addFlag(latitude, longitude);
+            i++;
+            }
+        }
+    });		
 };
 
 function buildAirportsMapInterface(airport) {
