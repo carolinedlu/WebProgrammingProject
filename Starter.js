@@ -49,7 +49,7 @@ async function buildModelsInterface() {
                 selected_model = model;
                 buildReviewInterface(model); //Set up review interface for this plane
                 displayVideos(model); //Display Youtube videos for this plane
-		buildDestionationsInterface(model);
+		buildDestinationsInterface(model);
             }
         }
     });
