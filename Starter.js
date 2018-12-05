@@ -19,7 +19,6 @@ async function buildModelsInterface() {
 	let selected_model = null;
  
 	body.append('<div class="menuDiv"></div>');
-	//body.append('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>');
 	body.append('<div class="newDiv"></div>');
 	body.append('<div class="revDiv"></div>');
 	
@@ -104,7 +103,7 @@ body.append('<button id="submitNewReview">Submit Review</button>');
 function buildDestinationsInterface(model) {
 	//if (builtInterface === 0) {
     let body = $('body');
-    body.append('<div id="map"><h1><br>Destinations</h1></div>');
+    body.append('<div id="map"><h1><br><br><br>Destinations</h1></div>');
     body.append('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
 
 // if (builtInterface === 1) {
