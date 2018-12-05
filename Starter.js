@@ -106,21 +106,12 @@ body.append('<button id="submitNewReview">Submit Review</button>');
 };
 
 function buildDestinationsInterface(model) {
-	//if (builtInterface === 0) {
     let body = $('body');
-	body.append('<p id="spaces"><br><br><br></p>');
+    body.append('<p id="spaces"><br><br><br></p>');
     body.append('<h1 id="destinationsTitle">Destinations</h1>');
     body.append('<div id="map"></div>');
     body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
-    body.append('<p id="spacesAfterMap"><br><br><br></p>');
-
-// if (builtInterface === 1) {
-//         $('.interface').empty();
-//     }
-//body.append('<h1 class="interface">Destinations</h1>');	
-//body.append('<div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
- 	//builtInterface=1;
-	//}
+    body.append('<p id="spacesAfterMap"><br><br></p>');
 };
 
 var map;
