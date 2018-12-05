@@ -103,7 +103,8 @@ function buildReviewInterface(model) {
         }
 
         Reviews.Add(model, name, text);
-        Backend.UpdatePlane(model).then(() => {
+        const updatePromise = (model.city === undefined) ? Backend.UpdatePlane(model) : Backend.UpdateAirport(model);
+        updatePromise.then(() => {
             updateReviews();
         }).catch(() => {
             alert("There was an error adding your review. Please try resubmitting.");
@@ -213,9 +214,7 @@ async function buildAirportsInterface() {
 	$("#video").remove();
 	$("#reviewsTitle").remove();
 	$("#visible-reviews").remove();
-	$("#specificReviewTitle").remove();
-	$("#newReview").remove();
-	$("#submitNewReview").remove();
+	$("#review-form").remove();
 	$("#spaces").remove();
 	$("#map").remove();
 	$("#mapAPI").remove();
