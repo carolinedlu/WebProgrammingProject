@@ -104,8 +104,8 @@ body.append('<button id="submitNewReview">Submit Review</button>');
 function buildDestinationsInterface(model) {
 	//if (builtInterface === 0) {
     let body = $('body');
-    body.append('<div id="map"></div><br><br>Hello');
-    body.append('Hello<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
+    body.append('<div id="map"></div><br><br><br>');
+    body.append('<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
 
 // if (builtInterface === 1) {
 //         $('.interface').empty();
@@ -119,8 +119,8 @@ function buildDestinationsInterface(model) {
 var map;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
+    center: {lat: 35.9100, lng: -79.0533},
+    zoom: 18
   });
 }
 
