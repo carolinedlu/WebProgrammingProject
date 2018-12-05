@@ -1,4 +1,5 @@
-var builtInterface = 0;
+var airports = 0;
+var map;
 
 Backend.Authenticate();
 
@@ -132,17 +133,27 @@ function buildAirportsMapInterface(airport) {
     currentAirport = airport;
 };
 
-var map;
+function addFlag(latitude, longitude) {
+var marker = new google.maps.Marker({
+    position: {lat: latitude, lng: longitude},
+    map: map,
+    title: 'Hello World!'
+    });
+};
+
 function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.9100, lng: -79.0533},
-    zoom: 15
-  });
+    var myLatLng = {lat: 39.8283, lng: -98.5795};
+
+    map = new google.maps.Map(document.getElementById('map'), {
+         zoom: 3,
+         center: myLatLng
+       });
+if (airports===1) {
   changeMapFocus(currentAirport.latitude, currentAirport.longitude);
+}
 };
 
 function changeMapFocus(lat, long) {
-    //console.log(lat);
     map.setCenter(new google.maps.LatLng(lat, long) );
 };
 
