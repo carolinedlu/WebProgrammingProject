@@ -19,7 +19,7 @@ async function buildModelsInterface() {
 	let selected_model = null;
  
 	body.append('<div class="menuDiv"></div>');
-	body.append('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>');
+	//body.append('<button class="button" onclick="buildDestinationsInterface()">Destinations</button>');
 	body.append('<div class="newDiv"></div>');
 	body.append('<div class="revDiv"></div>');
 	
@@ -100,16 +100,17 @@ body.append('<button id="submitNewReview">Submit Review</button>');
 	body.append('</div>');
 };
 
-function buildDestinationsInterface() {
-	//console.log(builtInterface);
+function buildDestinationsInterface(model) {
 	//if (builtInterface === 0) {
-	let body = $('body');
+    let body = $('body');
+    body.append('<div id="map"></div><br><br>Hello');
+    body.append('Hello<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap" async defer></script>');
 
 // if (builtInterface === 1) {
 //         $('.interface').empty();
 //     }
 //body.append('<h1 class="interface">Destinations</h1>');	
-body.append('<div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
+//body.append('<div id="map"></div><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSkCRuJOE-EZ3ZnGn8zDB7f0ilfJkyZSE&callback=initMap" async defer></script>');
  	//builtInterface=1;
 	//}
 };
