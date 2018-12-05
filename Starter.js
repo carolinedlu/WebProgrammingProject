@@ -17,11 +17,11 @@ async function buildModelsInterface() {
     }
 
 	let selected_model = null;
- 
+
 	body.append('<div class="menuDiv"></div>');
 	body.append('<div class="newDiv"></div>');
 	body.append('<div class="revDiv"></div>');
-	
+
    // const passengers_button = $('<button id="passengers">Passengers</button>').click(() => {
     //    if (selected_model !== null) {
      //       buildPassengersInterface(selected_model);
@@ -43,11 +43,11 @@ async function buildModelsInterface() {
 	    	$("#mapAPI").remove();
 	    	$("#spacesAfterMap").remove();
 	    	$("#destinationsTitle").remove();
-		
+
             let selection = document.getElementById("dropDown");
             let selectionName = selection.options[selection.selectedIndex].value;
 	    body.append("<h1 id='planeName'>"+selectionName+"</h1>");
-	    
+
 	    for (const model of models) {
             if (model.name === selectionName) {
                 selected_model = model;
@@ -78,29 +78,37 @@ function buildReviewInterface(model) {
 	visible_reviews.empty();
 	const reviews = Reviews.Get(model);
         for (const review of reviews) {
-            visible_reviews.append(`<p id="reviews"><em>${review}</em></p>`);
+            visible_reviews.append(`<p id="reviews"><em>${review.text}</em> ~ ${review.name}</p>`);
         }
     };
 
 body.append(visible_reviews);
 updateReviews();
-body.append('<h2 id="specificReviewTitle">Enter a new review of the '+model.name+'<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>');
-body.append('<button id="submitNewReview">Submit Review</button>');
+    const review_form = $('<div id="review-form">');
+    body.append(review_form);
+
+    review_form.append(`<h2 id="specificReviewTitle">Enter a new review of the ${model.name}</h2>`);
+    review_form.append(`<input id="review-name" placeholder="Name"><br><br>`);
+    review_form.append('<textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea><br>');
+    review_form.append('<button id="submitNewReview">Submit Review</button>')
 
  //   $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
  //   $('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>').appendTo('.revDiv');
 
     let submit = document.getElementById("submitNewReview");
     submit.addEventListener("click", function submitNewReview() {
-         let review = document.getElementById("newReview").value;
-         Reviews.Add(model, review);
-         Backend.UpdatePlane(model).then(() => {
+        const name = $('#review-name').val();
+        const text = document.getElementById("newReview").value;
+        if (name.length === 0 || text.length === 0) {
+            return alert('Both name and review must be filled out!');
+        }
+
+        Reviews.Add(model, name, text);
+        Backend.UpdatePlane(model).then(() => {
             updateReviews();
-         }).catch(() => {
+        }).catch(() => {
             alert("There was an error adding your review. Please try resubmitting.");
-         });
-
-
+        });
     }, false);
 	body.append('</div>');
 };
@@ -195,7 +203,7 @@ async function buildAirportsInterface() {
     body.append('<select id="airportDropDown"><option selected="true" disabled="true">Select an airport</option></select>');
 
     for (const port of ports) {
-        let option = document.createElement("option");     
+        let option = document.createElement("option");
         option.text = port.name;
         option.value = port.name;
         document.getElementById("airportDropDown").options.add(option); //Add airport to drop-down menu
@@ -215,7 +223,7 @@ async function buildAirportsInterface() {
 	$("#mapAPI").remove();
 	$("#spacesAfterMap").remove();
 	$("#destinationsTitle").remove();
-	    
+
         let selection = document.getElementById("airportDropDown");
         let selectionName = selection.options[selection.selectedIndex].value;
         body.append("<h1 id='airportName'>"+selectionName+"</h1>");

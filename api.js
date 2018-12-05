@@ -103,9 +103,12 @@ class Reviews {
 
 	// Public API
 
-	static Add(obj, review) {
+	static Add(obj, name, text) {
 		const reviews = Reviews.Get(obj);
-		reviews.push(review);
+		reviews.push({
+			name: name,
+			text: text,
+		});
 		obj.info = JSON.stringify(reviews);
 	}
 
