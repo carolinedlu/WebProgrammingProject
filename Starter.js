@@ -114,7 +114,7 @@ function buildReviewInterface(model) {
 	body.append('</div>');
 };
 
-function buildDestinationsInterface(model) {
+function buildDestinationsInterface(plane) {
     let body = $('body');
     body.append('<p id="spaces"><br><br><br></p>');
     body.append('<h1 id="destinationsTitle">Destinations</h1>');
