@@ -136,6 +136,14 @@ function buildDestinationsInterface(model) {
     });		
 };
 
+function addFlag(latitude, longitude) {
+var marker = new google.maps.Marker({
+    position: {lat: latitude, lng: longitude},
+    map: map,
+    title: 'Hello World!'
+    });
+};
+
 function buildAirportsMapInterface(airport) {
     let body = $('body');
     body.append('<p id="spaces"><br><br><br></p>');
@@ -144,14 +152,6 @@ function buildAirportsMapInterface(airport) {
     body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
     body.append('<p id="spacesAfterMap"><br><br></p>');
     currentAirport = airport;
-};
-
-function addFlag(latitude, longitude) {
-var marker = new google.maps.Marker({
-    position: {lat: latitude, lng: longitude},
-    map: map,
-    title: 'Hello World!'
-    });
 };
 
 function initMap() {
