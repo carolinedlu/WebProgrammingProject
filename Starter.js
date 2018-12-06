@@ -121,7 +121,7 @@ function buildDestinationsInterface(plane) {
     body.append('<div id="map"></div>');
     body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
     body.append('<p id="spacesAfterMap"><br><br></p>');
-	
+
     Backend.GetAirportDeparturesAndArrivalsForPlane(plane).then((flights) => {
         var i = 0;
         for (const flight of flights) {
@@ -133,7 +133,7 @@ function buildDestinationsInterface(plane) {
             i++;
             }
         }
-    });		
+    });
 };
 
 function addFlag(latitude, longitude) {
