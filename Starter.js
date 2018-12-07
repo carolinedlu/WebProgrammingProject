@@ -74,9 +74,9 @@ function buildReviewInterface(model) {
 	body.append('<h1 id="reviewsTitle">Reviews</h1>');
 	const visible_reviews = $('<div id="visible-reviews">');
 	const updateReviews = async () => {
-	    visible_reviews.empty();
-        const reviews = Reviews.Get(model);
+	    const reviews = Reviews.Get(model);
         const fake_reviews = await GetFakePassengerReviews(model);
+        visible_reviews.empty();
         for (const review of fake_reviews.concat(reviews)) {
             visible_reviews.append(`<p id="reviews"><em>${review.text}</em> ~ ${review.name}</p>`);
         }
@@ -105,8 +105,10 @@ function buildReviewInterface(model) {
 
         Reviews.Add(model, name, text);
         const updatePromise = (model.city === undefined) ? Backend.UpdatePlane(model) : Backend.UpdateAirport(model);
-        updatePromise.then(() => {
-            updateReviews();
+        updatePromise.then(async () => {
+            await updateReviews();
+            $('#review-name').val('');
+            $('#newReview').val('');
         }).catch(() => {
             alert("There was an error adding your review. Please try resubmitting.");
         });
