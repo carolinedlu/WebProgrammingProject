@@ -8,6 +8,7 @@ $(document).mousemove(function(e){
 });
 
 async function buildModelsInterface() {
+	airports = 0;
 	let body = $('body');
 	emptyInterface(); //Clear page
 	const models = await Backend.GetPlanes();
