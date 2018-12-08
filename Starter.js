@@ -149,7 +149,9 @@ var marker = new google.maps.Marker({
 function buildAirportsMapInterface(airport) {
     let body = $('body');
     body.append('<div id="map"></div>');
-    $('<div class="aiportMapContainer"><h1 id="destinationsTitle">Map</h1></div>').appendTo('#map');
+body.append('<div class="aiportMapContainer"><h1 id="destinationsTitle">Map</h1></div>');
+
+    //$('<div class="aiportMapContainer"><h1 id="destinationsTitle">Map</h1></div>').appendTo('#map');
     body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
     currentAirport = airport;
 };
