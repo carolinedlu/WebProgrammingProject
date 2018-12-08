@@ -159,7 +159,7 @@ function initMap() {
     var myLatLng = {lat: 39.8283, lng: -98.5795};
 
     map = new google.maps.Map(document.getElementById('map'), {
-         zoom: 15,
+         zoom: 3,
          center: myLatLng
        });
 	if (airports===1) {
