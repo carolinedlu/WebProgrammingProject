@@ -3,12 +3,16 @@ var map;
 
 Backend.Authenticate();
 
+$(document).mousemove(function(e){
+    $("#image").css({left:e.pageX - 25, top:e.pageY - 25});
+});
+
 async function buildModelsInterface() {
 	let body = $('body');
 	emptyInterface(); //Clear page
-	body.append('<h1 class=modelHeader">Select an airplane model:</h1>');
 	const models = await Backend.GetPlanes();
-	body.append('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select><br><br>');
+  body.append('<div class="menuDiv"></div>');
+  $('<select id="dropDown"><option selected="true" disabled="true">Select a model</option></select>').appendTo('.menuDiv');
 
     for (const model of models) {
         let option = document.createElement("option");
@@ -19,40 +23,33 @@ async function buildModelsInterface() {
 
 	let selected_model = null;
 
-	body.append('<div class="menuDiv"></div>');
-	body.append('<div class="newDiv"></div>');
-	body.append('<div class="revDiv"></div>');
-
-   // const passengers_button = $('<button id="passengers">Passengers</button>').click(() => {
-    //    if (selected_model !== null) {
-     //       buildPassengersInterface(selected_model);
-      //  }
-    //});
-    //body.append(passengers_button);
-
     $("#dropDown").change(function planeObject(){ //Every time user selects a different plane
-		$("#videoTitle").remove();
-		$("#video").remove();
 		$("#reviewsTitle").remove();
 		$("#visible-reviews").remove();
 		$("#review-form").remove();
-	    	$("#planeName").remove();
-	    	$("#spaces").remove();
-	    	$("#map").remove();
-	    	$("#mapAPI").remove();
-	    	$("#spacesAfterMap").remove();
-	    	$("#destinationsTitle").remove();
+    $("#videoTitle").remove();
+		$("#video").remove();
+	  $("#planeName").remove();
+	  $("#spaces").remove();
+	 	$("#map").remove();
+	 	$("#mapAPI").remove();
+	 	$("#spacesAfterMap").remove();
+	 	$("#destinationsTitle").remove();
+    $(".revDiv").remove();
+    $(".videoDiv").remove();
+    $(".destContainer").remove();
 
-            let selection = document.getElementById("dropDown");
-            let selectionName = selection.options[selection.selectedIndex].value;
+
+      let selection = document.getElementById("dropDown");
+      let selectionName = selection.options[selection.selectedIndex].value;
 	    body.append("<h1 id='planeName'>"+selectionName+"</h1>");
 
 	    for (const model of models) {
             if (model.name === selectionName) {
-		buildDestinationsInterface(model);
                 selected_model = model;
                 buildReviewInterface(model); //Set up review interface for this plane
                 displayVideos(model); //Display Youtube videos for this plane
+                buildDestinationsInterface(model);
             }
         }
     });
@@ -68,10 +65,12 @@ function emptyInterface() {
 	body.append('<button class="homeBtn" onclick="buildHomeInterface()">Home</button><br>');
 };
 
+// REVIEWS
 function buildReviewInterface(model) {
 	console.log("reviews method called");
 	let body = $('body');
-	body.append('<h1 id="reviewsTitle">Reviews</h1>');
+	body.append('<h2 id="reviewsTitle">Reviews</h2>');
+  body.append('<div class="revDiv"></div>');
 	const visible_reviews = $('<div id="visible-reviews">');
 	const updateReviews = async () => {
 	    const reviews = Reviews.Get(model);
@@ -83,17 +82,17 @@ function buildReviewInterface(model) {
     };
 
     body.append(visible_reviews);
+    $('<div class="visRevDiv"></div>').appendTo('.revDiv');
     updateReviews();
     const review_form = $('<div id="review-form">');
     body.append(review_form);
+    $(visible_reviews).appendTo('.visRevDiv');
 
-    review_form.append(`<h2 id="specificReviewTitle">Enter a new review of the ${model.name}</h2>`);
+    review_form.append(`<h3 id="specificReviewTitle">Enter a new review of the ${model.name}</h3>`);
     review_form.append(`<input id="review-name" placeholder="Name"><br><br>`);
     review_form.append('<textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea><br>');
     review_form.append('<button id="submitNewReview">Submit Review</button>')
-
- //   $('<h2>Enter a new review of X model<h2><textarea id="newReview" name="textarea" style="width:250px;height:150px;"></textarea>').appendTo('.revDiv');
- //   $('<button id="submitNewReview" onclick="submitNewReview()">Submit Review</button>').appendTo('.revDiv');
+    $(review_form).appendTo('.revDiv');
 
     let submit = document.getElementById("submitNewReview");
     submit.addEventListener("click", function submitNewReview() {
@@ -116,13 +115,13 @@ function buildReviewInterface(model) {
 	body.append('</div>');
 };
 
+// DESTINATIONS
 function buildDestinationsInterface(plane) {
     let body = $('body');
-    body.append('<p id="spaces"><br><br><br></p>');
-    body.append('<h1 id="destinationsTitle">Destinations</h1>');
-    body.append('<div id="map"></div>');
+    body.append('<div class="destContainer"></div>');
+    $('<div id="map"></div>').appendTo('.destContainer');
     body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
-    body.append('<p id="spacesAfterMap"><br><br></p>');
+    $('#mapAPI').appendTo('#map');
 
     Backend.GetAirportDeparturesAndArrivalsForPlane(plane).then((flights) => {
         var i = 0;
@@ -146,13 +145,12 @@ var marker = new google.maps.Marker({
     });
 };
 
+// AIRPORT MAP
 function buildAirportsMapInterface(airport) {
     let body = $('body');
-    body.append('<p id="spaces"><br><br><br></p>');
-    body.append('<h1 id="destinationsTitle">Map</h1>');
     body.append('<div id="map"></div>');
+    $('<div class="aiportMapContainer"><h1 id="destinationsTitle">Map</h1></div>').appendTo('#map');
     body.append('<script id="mapAPI" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZpI3CbtNz2qkNW6N7YzHLqlPxzX6QadM&callback=initMap" async defer></script>');
-    body.append('<p id="spacesAfterMap"><br><br></p>');
     currentAirport = airport;
 };
 
@@ -195,28 +193,31 @@ async function GetFakePassengerReviews(model) {
     });
 }
 
+// HOME
 function buildHomeInterface() {
 	let body = $('body');
 
 	body.empty();
+  body.append('<img id="image" src="planeMouse.png"/>');
 	body.append('<div class="homeDiv"></div>');
 	body.append('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>');
-	body.append('<button class="button" onclick="buildModelsInterface()">Models</button>');
-	body.append('<button class="button" onclick="buildAirportsInterface()">Airports</button>');
-      //$('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>').appendTo('.homeDiv');
-      //$('<button class="button" onclick="buildModelsInterface()">Models</button>').appendTo('.homeDiv');
-	//$('<button class="button" onclick="buildAirportsInterface()">Airports</button>').appendTo('.homeDiv');
-
+  body.append('<div id="buttons-container"></div>');
+  $('<button class="button" onclick="buildModelsInterface()">Models</button>').appendTo('#buttons-container');
+  $('<button class="button" onclick="buildAirportsInterface()">Airports</button>').appendTo('#buttons-container');
+  body.append('<footer><p>Created by Roman Rogowski, Caroline Lu, and Dominique Jabbour - 2018</p></footer>');
+  $(document).mousemove(function(e){
+      $("#image").css({left:e.pageX-25, bottom:e.pageY-25});
+  });
 };
 
+// VIDEOS
 async function displayVideos(planeObj) {
 	let body = $('body');
 	let name = planeObj.name;
 
     let url = await YouTube.GetTopVideoForPlane(planeObj);
 	console.log(planeObj);
-   	body.append('<h1 id="videoTitle">Videos of the '+name+'<h1>');
-	body.append('<iframe id="video" class="interface" width="420" height="345" src='+url+'></iframe>');
+    $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="500" height="300" src='+url+'></iframe></div>').appendTo('.destContainer');
 };
 
 
@@ -225,7 +226,8 @@ async function buildAirportsInterface() {
 
     emptyInterface();
     const ports = await Backend.GetAirports();
-    body.append('<select id="airportDropDown"><option selected="true" disabled="true">Select an airport</option></select>');
+    body.append('<div class="menuDiv"></div>');
+    $('<select id="airportDropDown"><option selected="true" disabled="true">Select an airport</option></select>').appendTo('.menuDiv');
 
     for (const port of ports) {
         let option = document.createElement("option");
@@ -234,8 +236,8 @@ async function buildAirportsInterface() {
         document.getElementById("airportDropDown").options.add(option); //Add airport to drop-down menu
     }
 
-    $("#airportDropDown").change(function selectAirport(){ //Every time user selects a different airport
-        $("#airportName").remove();
+  $("#airportDropDown").change(function selectAirport(){ //Every time user selects a different airport
+  $("#airportName").remove();
 	$("#videoTitle").remove();
 	$("#video").remove();
 	$("#reviewsTitle").remove();
@@ -246,6 +248,8 @@ async function buildAirportsInterface() {
 	$("#mapAPI").remove();
 	$("#spacesAfterMap").remove();
 	$("#destinationsTitle").remove();
+  $(".revDiv").remove();
+  $(".videoDiv").remove();
 
         let selection = document.getElementById("airportDropDown");
         let selectionName = selection.options[selection.selectedIndex].value;
@@ -254,7 +258,7 @@ async function buildAirportsInterface() {
             if (port.name === selectionName) {
                 buildReviewInterface(port); //Set up review interface for this plane
                 displayVideos(port); //Display Youtube videos for this plane
-		buildAirportsMapInterface(port);
+		            buildAirportsMapInterface(port);
 
             }
         }
