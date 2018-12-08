@@ -200,7 +200,7 @@ function buildHomeInterface() {
 	body.empty();
   body.append('<img id="image" src="planeMouse.png"/>');
 	body.append('<div class="homeDiv"></div>');
-	body.append('<h1 id="pageTitle">Airplane Model Comparison Tool</h1>');
+	body.append('<h1 id="pageTitle">Perfect Plane Picker 3000</h1>');
   body.append('<div id="buttons-container"></div>');
   $('<button class="button" onclick="buildModelsInterface()">Models</button>').appendTo('#buttons-container');
   $('<button class="button" onclick="buildAirportsInterface()">Airports</button>').appendTo('#buttons-container');
@@ -218,6 +218,7 @@ async function displayVideos(planeObj) {
     let url = await YouTube.GetTopVideoForPlane(planeObj);
 	console.log(planeObj);
     $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="500" height="300" src='+url+'></iframe></div>').appendTo('.destContainer');
+    $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="450" height="250" src='+url+'></iframe></div>').appendTo('#airportVid');
 };
 
 // AIRPORTS
@@ -250,7 +251,7 @@ async function buildAirportsInterface() {
 	$("#destinationsTitle").remove();
   $(".revDiv").remove();
   $(".videoDiv").remove();
-  body.append('<div class="destContainer"></div>');
+  $('#airportVid').remove();
 
         let selection = document.getElementById("airportDropDown");
         let selectionName = selection.options[selection.selectedIndex].value;
@@ -258,10 +259,11 @@ async function buildAirportsInterface() {
         for (const port of ports) {
             if (port.name === selectionName) {
                 buildReviewInterface(port); //Set up review interface for this airport
-		buildAirportsMapInterface(port);
+		            buildAirportsMapInterface(port);
                 displayVideos(port); //Display Youtube videos for this aiport
-
             }
         }
+        body.append('<div id="airportVid"></div>');
+
     });
 };

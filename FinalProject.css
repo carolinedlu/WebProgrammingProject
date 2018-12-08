@@ -179,7 +179,7 @@ div#buttons-container {
 
 #review-form {
   text-align: center;
-  width: 40%;
+  width: 50%;
   float: left;
 }
 
@@ -237,6 +237,11 @@ div#visible-reviews {
 .videoDiv {
   text-align: center;
   display: block;
+  float: right;
+  margin-right: 50px;
+}
+
+#airportVid {
   width: 50%;
   float: right;
 }
@@ -261,9 +266,9 @@ div#visible-reviews {
 
 .destContainer {
   text-align: center;
-  /* width: 50%; */
-  /* float: left; */
-  height: 350px
+  height: 350px;
+  display: inline-block;
+  width: 100%;
 }
 
 /* Dropdown Styles */
