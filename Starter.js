@@ -222,6 +222,7 @@ async function displayVideos(planeObj) {
 
 // AIRPORTS
 async function buildAirportsInterface() {
+	airports = 1;
 	let body = $('body');
 
     emptyInterface();
