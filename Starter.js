@@ -250,6 +250,7 @@ async function buildAirportsInterface() {
 	$("#destinationsTitle").remove();
   $(".revDiv").remove();
   $(".videoDiv").remove();
+  body.append('<div class="destContainer"></div>');
 
         let selection = document.getElementById("airportDropDown");
         let selectionName = selection.options[selection.selectedIndex].value;
