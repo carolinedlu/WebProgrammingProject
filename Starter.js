@@ -257,8 +257,8 @@ async function buildAirportsInterface() {
         for (const port of ports) {
             if (port.name === selectionName) {
                 buildReviewInterface(port); //Set up review interface for this airport
+		buildAirportsMapInterface(port);
                 displayVideos(port); //Display Youtube videos for this aiport
-		            buildAirportsMapInterface(port);
 
             }
         }
