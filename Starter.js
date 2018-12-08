@@ -158,11 +158,10 @@ function initMap() {
     var myLatLng = {lat: 39.8283, lng: -98.5795};
 
     map = new google.maps.Map(document.getElementById('map'), {
-         zoom: 3,
+         zoom: 15,
          center: myLatLng
        });
-if (airports===1) {
-	console.log("airport mode detected");
+	if (airports===1) {
   changeMapFocus(currentAirport.latitude, currentAirport.longitude);
 }
 };
