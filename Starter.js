@@ -256,8 +256,8 @@ async function buildAirportsInterface() {
         body.append("<h1 id='airportName'>"+selectionName+"</h1>");
         for (const port of ports) {
             if (port.name === selectionName) {
-                buildReviewInterface(port); //Set up review interface for this plane
-                displayVideos(port); //Display Youtube videos for this plane
+                buildReviewInterface(port); //Set up review interface for this airport
+                displayVideos(port); //Display Youtube videos for this aiport
 		            buildAirportsMapInterface(port);
 
             }
