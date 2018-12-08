@@ -168,6 +168,7 @@ if (airports===1) {
 
 function changeMapFocus(lat, long) {
     map.setCenter(new google.maps.LatLng(lat, long) );
+    map.setZoom(14);
 };
 
 async function GetFakePassengerReviews(model) {
