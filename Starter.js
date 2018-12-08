@@ -162,6 +162,7 @@ function initMap() {
          center: myLatLng
        });
 if (airports===1) {
+	console.log("airport mode detected");
   changeMapFocus(currentAirport.latitude, currentAirport.longitude);
 }
 };
