@@ -8,6 +8,7 @@ $(document).mousemove(function(e){
 });
 
 async function buildModelsInterface() {
+	airports = 0;
 	let body = $('body');
 	emptyInterface(); //Clear page
 	const models = await Backend.GetPlanes();
@@ -158,16 +159,17 @@ function initMap() {
     var myLatLng = {lat: 39.8283, lng: -98.5795};
 
     map = new google.maps.Map(document.getElementById('map'), {
-         zoom: 3,
+         zoom: 15,
          center: myLatLng
        });
-if (airports===1) {
+	if (airports===1) {
   changeMapFocus(currentAirport.latitude, currentAirport.longitude);
 }
 };
 
 function changeMapFocus(lat, long) {
     map.setCenter(new google.maps.LatLng(lat, long) );
+    map.setZoom(14);
 };
 
 async function GetFakePassengerReviews(model) {
@@ -223,6 +225,7 @@ async function displayVideos(planeObj) {
 
 // AIRPORTS
 async function buildAirportsInterface() {
+	airports = 1;
 	let body = $('body');
 
     emptyInterface();
