@@ -220,7 +220,7 @@ async function displayVideos(planeObj) {
     $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="500" height="300" src='+url+'></iframe></div>').appendTo('.destContainer');
 };
 
-
+// AIRPORTS
 async function buildAirportsInterface() {
 	let body = $('body');
 
