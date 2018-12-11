@@ -233,6 +233,7 @@ div#visible-reviews {
 .videoDiv {
   text-align: center;
   margin: 0 50px;
+  display: inline-block;
 
 /*   display: block; */
 /*   float: right; */
