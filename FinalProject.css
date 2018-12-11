@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Heebo:200');
 
 /* General Styles */
 
+html {
+  font-family: 'Roboto', sans-serif;
+} 
 #image {
   position:absolute;
   z-index:999;
@@ -22,7 +26,6 @@ footer {
   height: 50px;
   background-color: #1d5374;
   color: white;
-  font-family: Arial;
   font-size: 18px;
   text-align: center;
 }
@@ -36,14 +39,15 @@ body {
 }
 
 #pageTitle, h1 {
-  font-family: Arial, bold;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 200;
+  font-size: 80px;
   font-size: 48px;
   text-align: center;
-  color: white;
+  color: #ffffff;
 }
 
 h2 {
-  font-family: Arial, bold;
   text-align: center;
   color: #1d5374;
 }
@@ -57,7 +61,6 @@ h2 {
   flex: 1 0 25%;
   text-align: center;
   font-size: 15px;
-  font-family: Arial;
   margin: auto;
 }
 
@@ -85,7 +88,6 @@ div#buttons-container {
   flex: 1 0 25%;
   text-align: center;
   font-size: 30px;
-  font-family: Arial;
   display:inline-block;
 }
 
@@ -120,7 +122,6 @@ div#buttons-container {
 
 .text {
   color: white;
-  font-family: Arial, bold;
   font-size: 42px;
   text-align: center;
   position: absolute;
@@ -144,7 +145,6 @@ div#buttons-container {
   flex: 1 0 25%;
   text-align: center;
   font-size: 15px;
-  font-family: Arial;
 }
 
 .homeBtn:hover {
@@ -173,7 +173,6 @@ div#buttons-container {
   flex: 1 0 25%;
   text-align: center;
   font-size: 15px;
-  font-family: Arial;
   margin: auto;
 }
 
@@ -188,7 +187,6 @@ div#visible-reviews {
   height: 280px;
   width: 500px;
   font-size: 15px;
-  font-family: Arial;
   color: #1d5374;
   display: inline-block;
 }
@@ -212,7 +210,6 @@ div#visible-reviews {
 }
 
 #specificReviewTitle {
-  font-family: Arial;
   color: #1d5374;
 }
 
@@ -276,26 +273,4 @@ div#visible-reviews {
 #dropDown, #airportDropDown {
   height: 50px;
   font-size: 25px;
-}
-
-/* Image Styles */
-
-#Boeing737 {
-  background-image: url("https://media.bizj.us/view/img/2828931/boeing-737-max-engines*1024xx632-356-0-27.png");
-  background-size: cover;
-}
-
-#AirbusA380 {
-  background-image: url("https://3rxg9qea18zhtl6s2u8jammft-wpengine.netdna-ssl.com/wp-content/uploads/2014/02/airbus.jpg");
-  background-size: cover;
-}
-
-#AirbusA320 {
-  background-image: url("https://store.x-plane.org/assets/images/files/peterhager/320neo/01.jpg");
-  background-size: cover;
-}
-
-#Boeing747 {
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Lufthansa_Boeing_747-8_%2816093562187%29.jpg/1200px-Lufthansa_Boeing_747-8_%2816093562187%29.jpg");
-  background-size: cover;
 }
