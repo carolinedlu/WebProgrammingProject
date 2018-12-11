@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-@import url('https://fonts.googleapis.com/css?family=Heebo:200');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 /* General Styles */
 
@@ -40,8 +40,7 @@ body {
 }
 
 #pageTitle, h1 {
-  font-family: 'Heebo', sans-serif;
-  font-weight: 200;
+  font-family: 'Montserrat', sans-serif;
   font-size: 80px;
   text-align: center;
   color: #ffffff;
