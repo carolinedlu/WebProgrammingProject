@@ -48,7 +48,7 @@ body {
 
 h2 {
   text-align: center;
-  color: #1d5374;
+  color: #003366;
 }
 
 /* Menu Buttons Styles */
@@ -93,31 +93,6 @@ div#buttons-container {
 .model:hover {
   background-color: red;
 }
-
-/* .overlay-container {
-  position: relative;
-  text-align: center;
-  display: inline-block;
-}
-
-.overlay {
-  margin: 25px;
-  border-radius: 25px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 250px;
-  opacity: 1;
-  transition: .5s ease;
-  background-color: #1d5374;
-}
-
-.overlay-container:hover .overlay {
-  opacity: 0;
-  display: none;
-} */
 
 .text {
   color: white;
@@ -186,7 +161,7 @@ div#visible-reviews {
   height: 280px;
   width: 500px;
   font-size: 15px;
-  color: #1d5374;
+  color: #003366;
   display: inline-block;
 }
 
@@ -199,7 +174,7 @@ div#visible-reviews {
   border-radius: 25px;
   border-style: solid;
   border-width: 3px;
-  border-color: #1d5374;
+  border-color: #003366;
 }
 
 .visRevDiv {
@@ -209,7 +184,7 @@ div#visible-reviews {
 }
 
 #specificReviewTitle {
-  color: #1d5374;
+  color: #003366;
 }
 
 #review-name {
@@ -223,7 +198,7 @@ div#visible-reviews {
   border-radius: 10px;
   border-style: solid;
   border-width: 3px;
-  border-color: #1d5374;
+  border-color: #003366;
   font-size: 15px;
   background: #EBF2F5;
 }
