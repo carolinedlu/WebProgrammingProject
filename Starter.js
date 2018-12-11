@@ -68,7 +68,7 @@ function emptyInterface() {
 
 // REVIEWS
 function buildReviewInterface(model) {
-	console.log("reviews method called");
+	//console.log("reviews method called");
 	let body = $('body');
 	body.append('<h2 id="reviewsTitle">Reviews</h2>');
   body.append('<div class="revDiv"></div>');
@@ -218,7 +218,7 @@ async function displayVideos(planeObj) {
 	let name = planeObj.name;
 
     let url = await YouTube.GetTopVideoForPlane(planeObj);
-	console.log(planeObj);
+	//console.log(planeObj);
     $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="500" height="300" src='+url+'></iframe></div>').appendTo('.destContainer');
     $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="450" height="250" src='+url+'></iframe></div>').appendTo('#airportVid');
 };
