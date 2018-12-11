@@ -6,6 +6,7 @@
 html {
   font-family: 'Roboto', sans-serif;
 } 
+
 #image {
   position:absolute;
   z-index:999;
@@ -42,7 +43,6 @@ body {
   font-family: 'Heebo', sans-serif;
   font-weight: 200;
   font-size: 80px;
-  font-size: 48px;
   text-align: center;
   color: #ffffff;
 }
