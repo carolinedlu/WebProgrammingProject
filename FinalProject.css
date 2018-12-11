@@ -232,20 +232,22 @@ div#visible-reviews {
 
 .videoDiv {
   text-align: center;
-  display: block;
-  float: right;
-  margin-right: 50px;
+  margin: 0 50px;
+
+/*   display: block; */
+/*   float: right; */
+/*   margin-right: 50px; */
 }
 
 #airportVid {
   width: 50%;
-  float: right;
+/*   float: right; */
 }
 
 /* Destination Styles */
 
 .aiportMapContainer {
-  display: inline-block;
+/*   display: inline-block; */
 }
 
 #map {
@@ -257,13 +259,13 @@ div#visible-reviews {
 .map {
   height: 300px;
   width: 50%;
-  float: left;
+/*   float: left; */
 }
 
 .destContainer {
   text-align: center;
   height: 350px;
-  display: inline-block;
+/*   display: inline-block; */
   width: 100%;
 }
 
