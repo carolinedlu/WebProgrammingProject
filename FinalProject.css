@@ -255,3 +255,8 @@ div#visible-reviews {
   height: 50px;
   font-size: 25px;
 }
+
+#video {
+  height: 300px;
+  width: 500px;
+}
