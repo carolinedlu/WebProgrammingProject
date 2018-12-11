@@ -218,9 +218,11 @@ async function displayVideos(planeObj) {
 	let name = planeObj.name;
 
     let url = await YouTube.GetTopVideoForPlane(planeObj);
-	//console.log(planeObj);
-    $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="500" height="300" src='+url+'></iframe></div>').appendTo('.destContainer');
-    $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="450" height="250" src='+url+'></iframe></div>').appendTo('#airportVid');
+$('<div class="videoDiv"><iframe id="video" class="interface" width="500" height="300" src='+url+'></iframe></div>').appendTo('.destContainer');
+$('<div class="videoDiv"><iframe id="video" class="interface" width="450" height="250" src='+url+'></iframe></div>').appendTo('#airportVid');
+
+//     $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="500" height="300" src='+url+'></iframe></div>').appendTo('.destContainer');
+//     $('<div class="videoDiv"><h2 id="videoTitle">Videos of the '+name+'<h2><iframe id="video" class="interface" width="450" height="250" src='+url+'></iframe></div>').appendTo('#airportVid');
 };
 
 // AIRPORTS
