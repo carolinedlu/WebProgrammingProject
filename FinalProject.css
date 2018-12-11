@@ -209,7 +209,7 @@ div#visible-reviews {
   text-align: center;
   margin: 0 50px;
   display: inline-block;
-
+ */
 /*   display: block; */
 /*   float: right; */
 /*   margin-right: 50px; */
@@ -217,7 +217,7 @@ div#visible-reviews {
 
 #airportVid {
   text-align: center;
-  margin: 0 50px;
+/*   margin: 0 50px; */
   display: inline-block;
   width: 50%;
 /*   float: right; */
@@ -243,7 +243,7 @@ div#visible-reviews {
 }
 
 .destContainer {
-  text-align: center;
+/*   text-align: center; */
   height: 350px;
 /*   display: inline-block; */
   width: 100%;
