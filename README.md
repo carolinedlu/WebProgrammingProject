@@ -1,4 +1,4 @@
-# I <3 KMP
+# The goal of this project was to display data about various models of airplanes.
 
 ## Dependencies
 
